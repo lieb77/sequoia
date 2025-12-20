@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import 'react-slideshow-image/dist/styles.css';
+
 
 :root {
   --background: #ffffff;
@@ -19,8 +21,150 @@
   }
 }
 
+/*
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+ */
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url(/Touring.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+main {
+  padding: 2em;
+  display: grid;
+  place-items: center;
+
+}
+
+.blog {
+  display: contents;
+}
+
+
+.post,
+.warpme {
+  background-color: rgba(55, 55, 55, 0.4);
+  border: 1px solid #557;
+  border-radius: 8px;
+  color: #fff;
+  margin: 1em;
+  padding: 1em;
+}
+
+.post,
+.narrow {
+  max-width: 50%;
+}
+
+.oldstyle {
+  color: yellow;
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.ride-table {
+  min-width: 900px;
+}
+
+.ride-table .ride-column {
+  min-width: 340px;
+}
+
+.ride-col-right {
+  text-align: right;
+}
+
+.ride-table,
+.ride-table tr,
+.ride-table th,
+.ride-table td {
+  border: 1px solid #aaa;
+  padding: .2em .5em;
+}
+
+
+.nav-buttons {
+  border: 1px solid #777;
+  border-radius: 8px;
+  padding: 0 1em;
+}
+
+.nav-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 .5em;
+}
+
+.ridenav-form {
+  border-left: 1px solid #777;
+  border-right: 1px solid #777;
+  margin: 0 1em;
+  padding: 1em;
+
+}
+
+.ridenav-year {
+  border: 1px solid #777;
+  background-color: $fff;
+  padding: .5em 0;
+}
+
+.ridenav-view {
+  display: inline-block;
+  text-align: center;
+}
+
+.embedded-html p {
+  margin: .5em;
+  padding: .5em;
+
+}
+
+.epost img {
+  max-width: 600px;
+}
+
+.slideshow-container img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* global.css or similar */
+@media (max-width: 768px) {
+      /* Styles for mobile screens */
+}
+
+@media (min-width: 769px) {
+      /* Styles for larger screens */
 }
