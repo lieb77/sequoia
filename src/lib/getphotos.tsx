@@ -1,47 +1,54 @@
 // /lib/getrides.tsx
 import { client } from "@/lib/api"
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
 /**
  * fetchPhotos
  *
  */
 export async function fetchPhotosForTour(id: string) {
-  const response = await client.getCollection("media--image", {
-    queryString: "sort=created&include=field_media_image" +
-      "&filter[condition][path]=field_tour.id" +
-      "&filter[condition][operator]=%3D" +
-      "&filter[condition][value]=" + id
-  })
 
-  return(response.data)
+	const params = new DrupalJsonApiParams()
+		.addFields('media--image', ['name','field_media_image', 'field_tour' ])
+		.addSort('created')
+		.addFilter('field_tour.id', id)
+		.addInclude('field_media_image')
+
+
+  const entities = await client.getResourceCollection("media--image", {params: params.getQueryObject() })
+
+  return(entities)
 }
 
 export async function fetchPhotosByTag(tag: string)  {
-  const response = await client.getCollection("media--image", {
-    queryString: "sort=created&include=field_media_image,field_category" +
-      "&filter[condition][path]=field_category.name" +
-      "&filter[condition][operator]=%3D" +
-      "&filter[condition][value]=" + tag
-  })
 
-  return(response.data)
+	const params = new DrupalJsonApiParams()
+		.addFields('media--image', ['name','field_media_image', 'field_category' ])
+		.addSort('created')
+		.addFilter('field_category.name', tag)
+		.addInclude('field_media_image', 'field_category')
+
+  	const entities = await client.getResourceCollection("media--image",{params: params.getQueryObject() })
+
+ 	return(entities)
 }
 
 export async function fetchPhotosByEvent(event: string)  {
-  const response = await client.getCollection("media--image", {
-    queryString: "sort=created&include=field_media_image,field_event" +
-      "&filter[condition][path]=field_event.name" +
-      "&filter[condition][operator]=%3D" +
-      "&filter[condition][value]=" + event
-  })
 
-  return(response.data)
+	const params = new DrupalJsonApiParams()
+		.addFields('media--image', ['name','field_media_image', 'field_event' ])
+		.addSort('created')
+		.addFilter('field_event.name', event)
+		.addInclude('field_media_image', 'field_event')
+
+  	const entities = await client.getResourceCollection("media--image",{params: params.getQueryObject() })
+
+ 	return(entities)   
 }
 
 
 export async function fetchFamilyEvents() {
-  const response = await client.getCollection("taxonomy_term--event")
-
-  return(response.data)
+  	const data = await client.getResourceCollection("taxonomy_term--event")
+  	return(data)
 
 }

@@ -58,14 +58,14 @@ interface JsonRide{
 export class Rides {
 
 	ridesArray: Ride[] = []
-  totalMiles = 0
+	totalMiles = 0
 	numRides = 0
 	longest = 0
 	avgMiles = 0
 
 	// Constructor is passes raw data from JSON:API
 	constructor(data: JsonRide[]) {
-
+console.log(data)
 		data.forEach((ride:JsonRide) =>
 		{
 			this.ridesArray.push({
@@ -76,7 +76,7 @@ export class Rides {
 				bike:    ride.field_bike.title,
 				buddies: ride.field_buddies,
 				body:    ride.body ? fixUrls(ride.body.processed) : "No notes",
-				link:    base + ride.path.alias
+			//	link:    base + ride.path.alias
 			})
 			this.totalMiles += ride.field_miles
 			this.numRides++

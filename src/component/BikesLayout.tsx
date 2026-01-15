@@ -13,11 +13,12 @@ export function BikesLayout({ bikes }: JSX.Element){
 									<p>{ bike.from } &nbsp; { bike.year }</p>
 									<div className="embedded-html" dangerouslySetInnerHTML={{ __html: bike.body }} />
 								</div>
-							<div>
+	
+						<div>
 							  { bike.urls.map(url =>
   						    <Image key={url} src={url} alt='Bike' width={500} height={500} className="my-2"/>
 							  )}
-							</div>
+							</div> 
 						</div>
 					</div>
 			)}

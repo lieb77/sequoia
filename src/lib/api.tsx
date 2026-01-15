@@ -1,8 +1,8 @@
 /* lib/api.ts */
-import { JsonApiClient } from "@drupal-api-client/json-api-client"
-// import * as JSONAPI from 'jsonapi-typescript'
-
+import { NextDrupal } from "next-drupal"
 
 export const base = "https://paullieberman.org"
-export const client = new JsonApiClient(base)
+export const client = new NextDrupal(base);
+
+
 

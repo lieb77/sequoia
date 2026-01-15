@@ -6,6 +6,7 @@
  *
  */
 import { base } from "@/lib/api"
+import { bikeNames } from "@/lib/getbikes"
 
 export interface Bike {
 	id:    string,
@@ -46,10 +47,10 @@ export class Bikes {
 		bikes.forEach((bike: JsonBike) => {
 			const urls: string[] = []
 			if(Array.isArray(bike.field_bicycle_picture))
-			  bike.field_bicycle_picture.forEach(pic =>
-			    urls.push( base + pic.thumbnail.uri.url)
-        )
-
+				  bike.field_bicycle_picture.forEach(pic =>
+					urls.push( pic?.field_media_image?.image_style_uri?.['1024_wide'])
+			)
+	
 			this.bikesArray.push({
 				id: bike.id,
 				name: bike.title,
@@ -60,7 +61,8 @@ export class Bikes {
 				body: bike.body.processed,
 				urls: urls,
 			})
-		})
+			
+		})	
 	}
 
 	// Return all rides

@@ -1,23 +1,30 @@
 // /lib/getrides.tsx
 import { client } from "@/lib/api"
 import type { Ride } from "@/class/Ride"
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+
 
 
 export async function fetchRidesByYear(year): Promise<Ride[]> {
 
-  // Get first 50
-  const response = await client.getCollection("node--ride", {
-  queryString: "sort=-created&include=field_bike" +
-	"&filter[datefilter][condition][path]=field_ridedate" +
-	"&filter[datefilter][condition][operator]=STARTS_WITH" +
-	"&filter[datefilter][condition][value]=" + year
-})
+	const params = new DrupalJsonApiParams()
+ 		.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
+    	.addFilter("field_ridedate",year, 'STARTS_WITH' )
+    	.addInclude(['field_bike'])
+    	
+	// Get first 50
+	const nodes = await client.getResourceCollection("node--ride", {params: params.getQueryObject() })
+  
+	return nodes
+}
 
-	// Array to ccumulate all the data
+/*
+ 
+	// Array to accumulate all the data
 	const allRides: Ride[] = []
 
 	// Save the first batch of 50
-	response.data.forEach(ride => allRides.push(ride))
+	nodes.forEach(ride => allRides.push(ride))
 
 	// Get the links for the next batch of 50
 	let links = response.links
@@ -51,6 +58,8 @@ export async function fetchRidesByYear(year): Promise<Ride[]> {
 
   return allRides;
 }
+
+*/
 
 export async function fetchAllRides(): Promise<Ride[]> {
 
@@ -104,13 +113,12 @@ export async function fetchAllRides(): Promise<Ride[]> {
  */
 export async function fetchRidesByTour(id: string) : RideData[] {
 
-  const response = await client.getCollection("node--ride", {
-    queryString: "sort=created&include=field_tour" +
-      "&filter[condition][path]=field_tour.id" +
-      "&filter[condition][operator]=%3D" +
-      "&filter[condition][value]=" + id
-  })
-
-  return(response.data)
+	const params = new DrupalJsonApiParams()
+ 		.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
+    	.addFilter("field_tour.id", id )
+    	.addInclude(['field_tour'])
+    	
+	const nodes = await client.getResourceCollection("node--ride", {params: params.getQueryObject() })
+    return(nodes)
 }
 

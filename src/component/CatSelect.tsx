@@ -15,7 +15,7 @@ export function CatSelect({options, current}){
   }
 
  return(
-    <div className="m-2 p-2">
+    <div className="m-2 p-2 text-blue-600 photos-nav">
       Select Category:
       <select value={current} onChange={handleSelectChange} className="border p-2 rounded">
         {options.map((option) => (

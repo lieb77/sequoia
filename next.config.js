@@ -1,17 +1,19 @@
-module.exports = {
-    typescript: {
-        ignoreBuildErrors: true,
-    },
-    images: {
+
+const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  reactStrictMode: true,
+  images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'paullieberman.org',
-        port: '',
-        pathname: '/sites/default/files/**',
-        search: '',
+         protocol: 'https',
+         hostname: 'paullieberman.org',
+         port: '',
+         pathname: '/sites/default/files/**',
       },
     ],
   },
-  reactStrictMode: true,
 }
+
+module.exports = nextConfig

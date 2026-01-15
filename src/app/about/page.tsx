@@ -10,7 +10,7 @@ export default async function Page() {
   return (
  	  <Layout>
       <h1>About Paul Lieberman</h1>
-        <div className="h-card warpme">
+        <div className="h-card warpme max-w-4xl">
           <p>
               <span className="hidden p-name">Paul Lieberman</span>
               <span className="hidden p-nickname">lieb</span>
@@ -19,7 +19,7 @@ export default async function Page() {
               <a className="hidden u-email" href="mailto:lieb@paullieberman.net">eMail</a>
           </p>
           <div className="p-note">
-            <About data={data[0]} />
+            <About data={data} />
           </div>
         </div>
     </Layout>
