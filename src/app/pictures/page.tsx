@@ -61,7 +61,11 @@ export default async function Pictures(props: {
         {category === "Family" &&
           <EventSelect options={events} current={event}/>
         }
+<<<<<<< HEAD
         <Slideshow images={photos} interval={6000} />
+=======
+        <Slideshow images={photos} interval={3000} />
+>>>>>>> 57026cc0dbfd60a63ec08e4e76f8c8056d2c7dd2
       </Suspense>
     </Layout>
 

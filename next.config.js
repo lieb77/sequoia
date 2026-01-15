@@ -7,7 +7,9 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'paullieberman.org',
+        port: '',
         pathname: '/sites/default/files/**',
+        search: '',
       },
     ],
   },
