@@ -38,7 +38,7 @@ export class Blog {
         id: post.id,
         title: post.title,
         date: formatDate(post.created),
-        url: post.path.alias,
+        url: "https://paulleiberman.org/blog",
         body: fixUrls(post.body.processed),
         tags: post.field_tags.name,
       })

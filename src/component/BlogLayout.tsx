@@ -11,7 +11,7 @@ export function BlogLayout({ blog }){
 					<h3>{ post.title }</h3>
 					<p>Date: {post.date}</p>
 					<div dangerouslySetInnerHTML={{ __html: post.body }} />
-					<Link href={post.url}>Read on my website</Link>
+				    <Link href={post.url}>Read on my website</Link> 
 				</div>
 			)}
 		</div>
