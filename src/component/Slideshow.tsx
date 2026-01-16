@@ -6,29 +6,29 @@ import Image from 'next/image';
 import type { PhotoData } from '@/lib/types'
 
 export   const Slideshow = ({ images, interval = 4000 } : {images: PhotoData[]; interval: number}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, interval);
-
-    return () => clearInterval(timer); // Clean up the interval on unmount
-  }, [images, interval]);
-
-  if (images[currentIndex] === undefined ) return
-
-  return (
-    <div className="slideshow-container">
-      <Image
-        src={images[currentIndex].url}
-        alt={`Slide ${currentIndex + 1}`}
-        key={images[currentIndex].id}
-        width={1024}
-        height={768}
-        sizes="(max-height: 80vh) 100vw, 80vw"
-        style={{ objectFit: 'contain' }}
-      />
-    </div>
-  )
+	const [currentIndex, setCurrentIndex] = useState(0);
+	
+	useEffect(() => {
+		const timer = setInterval(() => {
+		  setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+		}, interval);
+		
+		return () => clearInterval(timer); // Clean up the interval on unmount
+	}, [images, interval]);
+	
+	if (images[currentIndex] === undefined ) return
+	
+	return (
+		<div className="slideshow-container">
+		  <Image
+			src={images[currentIndex].url}
+			alt={`Slide ${currentIndex + 1}`}
+			key={images[currentIndex].id}
+			width={1024}
+			height={768}
+			sizes="(max-height: 80vh) 100vw, 80vw"
+			style={{ objectFit: 'contain' }}
+		  />
+		</div>
+	)
 }

@@ -152,7 +152,7 @@ h4 {
   max-width: 600px;
 }
 
-.slideshow-container img {
+.slideshow img {
   height: 80vh;
   width: auto;
   object-fit: contain;

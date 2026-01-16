@@ -3,11 +3,13 @@ import { Layout } from '@/component/Layout'
 import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from "@/lib/getphotos"
 import { PhotoData, Photos } from '@/class/Photos'
 import { Event, Events } from '@/class/Events'
-import { Slideshow } from '@/component/Slideshow'
+// import { Slideshow } from '@/component/Slideshow'
 import { CatSelect } from '@/component/CatSelect'
 import { EventSelect } from '@/component/EventSelect'
 import { Suspense } from 'react';
-import { redirect } from 'next/navigation'
+
+import { ReactSlideshow } from '@/component/ReactSlideshow'
+
 
 export const dynamic = 'force-dynamic'
 
@@ -53,18 +55,23 @@ export default async function Pictures(props: {
     photos = new Photos(photoData).getPhotos()
   }
 
-
   return (
     <Layout>
+    	<CatSelect options={categories} current={category}/>
+        <ReactSlideshow images={photos} interval={6000} />
+    </Layout>
+
+  )  
+}
+
+/*
+   <Layout>
       <Suspense>
         <CatSelect options={categories} current={category}/>
         {category === "Family" &&
           <EventSelect options={events} current={event}/>
         }
-        <Slideshow images={photos} interval={6000} />
+        <ReactSlideshow images={photos} interval={6000} />
       </Suspense>
     </Layout>
-
-  )
-
-}
+*/
