@@ -30,7 +30,6 @@ export async function fetchBikes(): Promise<JsonBike[]> {
  *
  */
  export async function fetchBike(bike: string): Promise<JsonBike> {
- console.log(bike)
  
   	const params = new DrupalJsonApiParams()
  		.addFields("node--bicycle", ['title','body','field_make', 'field_model','field_purchased_from','field_year', 'field_bicycle_picture'])
@@ -40,8 +39,8 @@ export async function fetchBikes(): Promise<JsonBike[]> {
   	const nodes = await client.getResourceCollection<DrupalNode[]>(
     	"node--bicycle",
     	{params: params.getQueryObject() }
-  )
-  return nodes[0]
+  	)
+  	return nodes[0]
 
 }
 

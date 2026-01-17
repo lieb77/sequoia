@@ -28,8 +28,6 @@ export async function ServiceLog({ bike }){
 	
 
 	const nodes = await fetchServiceLog(bike)
-	console.log(nodes)
-
 
 	nodes.forEach((service: JsonService) => {
 		slog.push({
