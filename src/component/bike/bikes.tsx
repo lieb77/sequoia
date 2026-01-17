@@ -52,7 +52,7 @@ export async function Bikes({thisBike}) {
 	
 	return(
 		<div key={bike.id} className="bikediv warpme">
-			<div className="grid grid-cols-2 gap-4">
+			<div className="bike-display">
 				<div>
 					<h2 className="big">{ bike.title }</h2>
 					<p>{ bike.field_make } &nbsp; { bike.field_model }</p>
@@ -62,8 +62,8 @@ export async function Bikes({thisBike}) {
 						
 				<div>
 					{urls.map(url =>
-						<Image key={url} src={url} alt='Bike' width={500} height={500} className="my-2"/>
-							)}
+						<Image key={url} src={url} alt='Bike' width={600} height={600} className="my-2"/>
+					)}
 				</div> 
 			</div>
 			<ServiceLog bike={bike.title} />

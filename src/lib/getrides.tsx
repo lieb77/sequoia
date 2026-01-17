@@ -63,10 +63,17 @@ export async function fetchRidesByYear(year): Promise<Ride[]> {
 
 export async function fetchAllRides(): Promise<Ride[]> {
 
-  // Get first 50
-  const response = await client.getCollection("node--ride", {
-  queryString: "sort=-created&include=field_bike"})
+	const params = new DrupalJsonApiParams()
+ 		.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
+    	.addSort('created', 'DESC')
+    	.addInclude(['field_bike'])
 
+  	
+  	const nodes = await client.getResourceCollection("node--ride", {params: params.getQueryObject() })
+  
+	return nodes
+}
+/*
 	// Array to ccumulate all the data
 	const allRides: Ride[] = []
 
@@ -105,10 +112,10 @@ export async function fetchAllRides(): Promise<Ride[]> {
 
   return allRides;
 }
-
+*/
 
 /**
- * fetchRides
+ * fetchRidesByTour
  *
  */
 export async function fetchRidesByTour(id: string) : RideData[] {
