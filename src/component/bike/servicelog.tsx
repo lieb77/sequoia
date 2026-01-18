@@ -41,7 +41,7 @@ export async function ServiceLog({ bike }){
 
 	return(
 		<div className="servicelog">
-	
+            <h2>Service Log</h2>	
 			{slog.map(service =>
 				<div key={service.id} className="bike-service">
 					<div>
