@@ -3,13 +3,11 @@
  *
  */
 import { Layout } from '@/component/Layout'
-import { fetchTour } from '@/lib/gettours'
-import { fetchRidesByTour } from "@/lib/getrides"
-import { fetchPhotosForTour } from "@/lib/getphotos"
-import { Tour } from '@/component/Tour'
 import { Rides } from '@/component/ride/Rides'
 import { Photos } from '@/class/Photos'
-import { Tours } from '@/class/Tours'
+import { Tours } from '@/component/tour/Tours'
+import { Tour } from '@/component/tour/Tour'
+import { fetchTour, fetchRidesByTour, fetchPhotosForTour } from '@/component/tour/gettours'
 
 export default async function Page(props: {
   searchParams?: Promise<{
