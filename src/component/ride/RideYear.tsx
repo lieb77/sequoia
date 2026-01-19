@@ -1,7 +1,7 @@
 /* components/RideYear */
-import { RideTable } from "~/components/RideTable"
-import { StatsYear } from "~/components/StatsYear"
-import { getLongMonthNames } from "~/lib/utils"
+import { RideTable } from "./RideTable"
+import { StatsYear } from "./StatsYear"
+import { getLongMonthNames } from "@/lib/utils"
 
 export function Year({ rides, stats}: JSX.Element) {
 

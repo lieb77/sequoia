@@ -29,7 +29,7 @@ export function RideNav() {
 
     if (year && year < currentYear) {
     	const nextYear: number = parseInt(year, 10) + 1
-    	console.log(nextYear)
+    	
       params.set('year', nextYear)
     } else {
       params.delete('year')
@@ -78,21 +78,21 @@ export function RideNav() {
       </form>
       <div className="ridenav-view" >
         View as:<br />
-        <input onChange={() => setView('blob')}
+        <input onChange={() => setView('rides')}
           type="radio"
           id="blob"
           name="view"
-          value="blob"
+          value="rides"
           defaultChecked
         />
-        <label className="mr-2 p-1" htmlFor="blob">Blob</label>
-        <input onChange={() => setView('table')}
+        <label className="mr-2 p-1" htmlFor="rides">Rides</label>
+        <input onChange={() => setView('stats')}
           type="radio"
           id="table"
           name="view"
-          value="table"
+          value="stats"
         />
-        <label className="p-1" htmlFor="table">Table</label>
+        <label className="p-1" htmlFor="stats">Stats</label>
       </div>
 
   	</div>

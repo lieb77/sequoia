@@ -7,7 +7,7 @@ import { fetchTour } from '@/lib/gettours'
 import { fetchRidesByTour } from "@/lib/getrides"
 import { fetchPhotosForTour } from "@/lib/getphotos"
 import { Tour } from '@/component/Tour'
-import { Rides } from '@/class/Rides'
+import { Rides } from '@/component/ride/Rides'
 import { Photos } from '@/class/Photos'
 import { Tours } from '@/class/Tours'
 

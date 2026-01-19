@@ -24,12 +24,6 @@ interface Ride {
 	link:     string
 }
 
-/*
-interface Bike {
-	bike: string
-	miles: number
-}
-*/
 
 interface Stats {
   total:   number,
@@ -62,10 +56,10 @@ export class Rides {
 	numRides = 0
 	longest = 0
 	avgMiles = 0
-
+	
 	// Constructor is passes raw data from JSON:API
 	constructor(data: JsonRide[]) {
-console.log(data)
+
 		data.forEach((ride:JsonRide) =>
 		{
 			this.ridesArray.push({
@@ -76,7 +70,6 @@ console.log(data)
 				bike:    ride.field_bike.title,
 				buddies: ride.field_buddies,
 				body:    ride.body ? fixUrls(ride.body.processed) : "No notes",
-			//	link:    base + ride.path.alias
 			})
 			this.totalMiles += ride.field_miles
 			this.numRides++
@@ -84,7 +77,53 @@ console.log(data)
 			  this.longest = ride.field_miles
 		})
 		this.avgMiles = Math.round(this.totalMiles / this.numRides)
-
+		
+	}
+	
+	public getYearlyStats() {
+	
+		const rides = this.ridesArray
+		
+		const monthNames = [
+			"January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"
+		];
+		
+		// 1. Initialize the 12-month structure
+		const initialAcc = monthNames.reduce((obj, month) => {
+			obj[month] = { month, total: 0, bikes: {} };
+			return obj;
+		}, {});
+		
+		// 2. Aggregate the data
+		const monthlyData = rides.reduce((acc, ride) => {
+			const date = new Date(ride.date);
+			const month = date.toLocaleString('default', { month: 'long' });
+			const miles = parseInt(ride.miles) || 0;
+			const bikeName = ride.bike || 'Unknown';
+			
+			if (acc[month]) {
+				acc[month].total += miles;
+				acc[month].bikes[bikeName] = (acc[month].bikes[bikeName] || 0) + miles;
+			}
+			return acc;
+		}, initialAcc);
+		
+		// 3. Calculate Yearly Stats
+		const totalMiles = rides.reduce((sum, r) => sum + (parseInt(r.miles) || 0), 0);
+		
+		const stats = {
+			totalMiles: totalMiles,
+			rideCount: rides.length,
+			average: rides.length ? Math.round(totalMiles / rides.length) : 0,
+    		longest: Math.max(...rides.map(r => Math.round(r.miles) || 0), 0)
+		};
+		
+		return {
+			tableRows: Object.values(monthlyData), // Returns the Jan-Dec array
+			stats,
+			uniqueBikes: [...new Set(rides.map(r => r.bike).filter(Boolean))]
+		};
 	}
 
 	public sortAsc() : void {
@@ -115,7 +154,24 @@ console.log(data)
 		})
 
 	}
-}
+
+
+
+
+	
+}	
+	
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

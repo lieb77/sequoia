@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+		
+	.blog-wrapper {
+		@apply place-items-center;
+	}
+	
+	.blog {
+		background-color: #060606b3;
+		padding: 0 4em;
+		max-width: 50vw;
+	}
+	
+	.post {	
+		border: 1px solid #557;
+		border-radius: 8px;
+		color: #fff;
+		margin: 1em;
+		padding: 1em;
+	}
+	
+	.post-body {
+		@apply mt-6 font-serif text-base leading-loose;
+	}	
+
+	.load-more-btn {
+		color: #fff;
+		background-color: darkslategray;
+		padding: .5em;
+		border-radius: 6px;
+		margin-left: 48%;
+		cursor: pointer;
+	}
+
+}

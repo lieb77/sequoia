@@ -1,10 +1,10 @@
 // /rides/page.tsx
 import { Layout } from '@/component/Layout'
-import { RideView } from '@/component/RideView'
-import { RideNav} from '@/component/RideNav'
+import { RideView } from '@/component/ride/RideView'
+import { RideNav} from '@/component/ride/RideNav'
 import { currentYear } from '@/lib/utils'
-import { fetchRidesByYear } from '@/lib/getrides'
-import { Rides } from '@/class/Rides'
+import { fetchRidesByYear } from '@/component/ride/allrides'
+import { Rides } from '@/component/ride/Rides'
 import { Suspense } from 'react';
 
 export default async function Page(props: {
@@ -25,7 +25,7 @@ export default async function Page(props: {
     rides.sortAsc()
 
   const myRides = rides.getRides()
-  const stats   = rides.getStats()
+  const stats   = rides.getYearlyStats()
 
   return (
    	<Layout>

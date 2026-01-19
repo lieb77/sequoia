@@ -1,7 +1,13 @@
 @import "tailwindcss";
 @import 'react-slideshow-image/dist/styles.css';
 
-@import '../component/bike/bikes.css'
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '../component/ride/ride.css';
+@import '../component/bike/bikes.css';
+@import '../component/blog/blog.css';
 
 :root {
   --background: #ffffff;
@@ -43,12 +49,6 @@ main {
 
 }
 
-.blog {
-  display: contents;
-}
-
-
-.post,
 .warpme {
   background-color: #0c090980;
   border: 1px solid #557;
@@ -58,7 +58,6 @@ main {
   padding: 1em;
 }
 
-.post,
 .narrow {
   max-width: 50%;
 }
