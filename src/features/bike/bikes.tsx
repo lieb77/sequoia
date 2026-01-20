@@ -2,7 +2,7 @@
  *
  */
 import { fixUrls } from "@/lib/utils"
-import { fetchBike } from "@/component/bike/getbikes"
+import { fetchBike } from "./getbikes"
 import { ServiceLog } from  "./servicelog"
 import Image from "next/image"
 

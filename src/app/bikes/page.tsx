@@ -1,7 +1,6 @@
 // src/app/bikes/page.tsx
-import { Bikes, bikeNames } from "@/component/bike/bikes"
-import { BikeNav } from "@/component/bike/nav"
-import { Layout } from "@/component/Layout"
+import { Bikes, bikeNames, BikeNav } from "@/features/bike"
+import { Layout } from "@/components/Layout"
 
 export default async function Page(props: {
 	searchParams?: Promise<{

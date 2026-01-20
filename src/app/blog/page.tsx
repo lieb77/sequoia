@@ -1,7 +1,6 @@
 // /blog/page.tsx
-import { fetchBlog } from "@/component/blog/getblog"
-import { Layout } from '@/component/Layout'
-import { BlogList } from "@/component/blog/BlogList"
+import { fetchBlog,  BlogList } from "@/features/blog"
+import { Layout } from '@/components/Layout'
 
 export const dynamic = 'force-dynamic'
 

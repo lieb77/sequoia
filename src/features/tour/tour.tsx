@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Slideshow } from '@/component/Slideshow'
-import type { TourDataShort, TourData } from "@/component/tour/Tours"
+import type { TourDataShort, TourData } from "./tours"
 
 
 export function Tour({tour}: {tour: TourData} ){

@@ -3,9 +3,7 @@
  *
  */
 import { Layout } from '@/component/Layout'
-import { fetchTourIndex } from '@/component/tour/gettours'
-import { TourIndex } from '@/component/tour/Tour'
-import { ToursShort } from '@/component/tour/Tours'
+import { fetchTourIndex, TourIndex, ToursShort } from '@/features/tour'
 
 export default async function Page() {
 

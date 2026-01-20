@@ -2,7 +2,7 @@
 'use client';
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import './bikes.css'
+
 
 export function BikeNav({bikes}) {
 	const searchParams = useSearchParams()

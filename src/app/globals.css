@@ -5,9 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '../component/ride/ride.css';
-@import '../component/bike/bikes.css';
-@import '../component/blog/blog.css';
+@import '@/features/ride/ride.css';
+@import '@/features/bike/bikes.css';
+@import '@/features/blog/blog.css';
+@import '@/features/tour/tour.css';
 
 :root {
   --background: #ffffff;

@@ -1,7 +1,7 @@
 // /lib/getrides.tsx
 import { client } from "@/lib/api"
-import type { JsonBike  } from "@/class/Bikes"
-import type { JsonService } from "@/class/Service"
+import type { JsonBike  } from "./bikes"
+import type { JsonService } from "./service"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
 

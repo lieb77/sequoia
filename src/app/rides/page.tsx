@@ -1,11 +1,8 @@
 // /rides/page.tsx
-import { Layout } from '@/component/Layout'
-import { RideView } from '@/component/ride/RideView'
-import { RideNav} from '@/component/ride/RideNav'
+import { Layout } from '@/components/Layout'
 import { currentYear } from '@/lib/utils'
-import { fetchRidesByYear } from '@/component/ride/allrides'
-import { Rides } from '@/component/ride/Rides'
 import { Suspense } from 'react';
+import { RideView, RideNav, fetchRidesByYear, Rides } from '@/features/ride'
 
 export default async function Page(props: {
   searchParams?: Promise<{

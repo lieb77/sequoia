@@ -3,30 +3,10 @@
 import { fixUrls } from "@/lib/utils"
 import { fetchServiceLog } from "./getbikes"
 
-export interface Service {
-	id:    string
-	title:  string
-	date: string
-	body:  string
-	miles: number
-}
-
-export interface JsonService {
-  id: string,
-	title: string,
-	field_date1: string,
-	body: {
-	  processed: string
-  },
-	field_milage: number,
-	
-}
 
 export async function ServiceLog({ bike }){
 
-	const slog = []
-	
-
+	const slog = []	
 	const nodes = await fetchServiceLog(bike)
 
 	nodes.forEach((service: JsonService) => {

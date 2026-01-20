@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Layout } from '@/component/Layout'
+import { Layout } from '@/components/Layout'
 import { fetchAboutPage } from '@/lib/getabout.tsx'
-import { About } from '@/component/About'
+import { About } from '@/components/About'
 
 export default async function Page() {
 
