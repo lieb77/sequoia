@@ -1,5 +1,5 @@
 // /app/page.tsx
-import { Layout } from '@/component/Layout'
+import { Layout } from '@/components/Layout'
 import Image from 'next/image'
 export default function Home() {
   return (

@@ -2,7 +2,7 @@
 /* /tours/page.tsx
  *
  */
-import { Layout } from '@/component/Layout'
+import { Layout } from '@/components/Layout'
 import { fetchTourIndex, TourIndex, ToursShort } from '@/features/tour'
 
 export default async function Page() {

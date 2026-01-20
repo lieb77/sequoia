@@ -1,14 +1,14 @@
 // /pictures/page.tsx
-import { Layout } from '@/component/Layout'
+import { Layout } from '@/components/Layout'
 import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from "@/lib/getphotos"
 import { PhotoData, Photos } from '@/class/Photos'
 import { Event, Events } from '@/class/Events'
 // import { Slideshow } from '@/component/Slideshow'
-import { CatSelect } from '@/component/CatSelect'
-import { EventSelect } from '@/component/EventSelect'
+import { CatSelect } from '@/components/CatSelect'
+import { EventSelect } from '@/components/EventSelect'
 import { Suspense } from 'react';
 
-import { ReactSlideshow } from '@/component/ReactSlideshow'
+import { ReactSlideshow } from '@/components/ReactSlideshow'
 
 
 export const dynamic = 'force-dynamic'

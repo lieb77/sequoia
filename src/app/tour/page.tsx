@@ -2,12 +2,10 @@
 /* /tours/page.tsx
  *
  */
-import { Layout } from '@/component/Layout'
-import { Rides } from '@/component/ride/Rides'
+import { Layout } from '@/components/Layout'
+import { Rides } from '@/features/ride'
 import { Photos } from '@/class/Photos'
-import { Tours } from '@/component/tour/Tours'
-import { Tour } from '@/component/tour/Tour'
-import { fetchTour, fetchRidesByTour, fetchPhotosForTour } from '@/component/tour/gettours'
+import { Tours, Tour, fetchTour, fetchRidesByTour, fetchPhotosForTour } from '@/features/tour'
 
 export default async function Page(props: {
   searchParams?: Promise<{

@@ -1,5 +1,5 @@
 // components/Layout.tsx
-import { Navbar } from '@/component/Navbar';
+import { Navbar } from '@/components/Navbar';
 
 export const Layout = ({ children }) => {
   return (
