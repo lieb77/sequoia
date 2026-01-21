@@ -1,0 +1,20 @@
+@reference "../../../app/globals.css";
+
+.rideContainer {
+	@apply bg-dark-glass border border-glass-border rounded-glass p-2 text-white max-w-4xl;
+}
+
+.rideItem {
+    @apply bg-dark-glass border border-glass-border rounded-glass p-4 m-4; 
+}
+
+.rideBody {
+	max-width: 60vw;
+}
+
+.rideBody img {
+	max-width: 40vw;
+}
+
+
+

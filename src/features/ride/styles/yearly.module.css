@@ -1,0 +1,34 @@
+
+
+
+.stats-container {
+	@apply warpme
+}
+
+.summary-table {
+	margin-bottom: 1em;
+	border-bottom: 1px solid #557;
+}
+.summary-table th,
+.summary-table td {
+	text-align: left;
+	padding: 0 .2em;
+}
+
+
+.stats-table {
+	border: 1px solid #557;
+	padding: 1em;
+	min-width: 50vw;
+}
+
+.stats-table tr {
+	border: 1px solid #557;
+}
+
+.stats-table th,
+.stats-table td {
+	border: 1px solid #557;
+	text-align: left;
+}
+

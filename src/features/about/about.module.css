@@ -1,0 +1,25 @@
+
+@reference "../../app/globals.css";
+
+.aboutPage {
+	@apply bg-dark-glass border border-glass-border rounded-glass p-4 m-4 text-white max-w-4xl;
+}
+
+.aboutPage h1 {
+	@apply text-white;
+}
+
+.hCard {
+	
+}
+
+.pName,
+.pNickname,
+.uUrl,
+.uEmail {
+	@apply hidden;
+}
+
+.pNote p {
+	@apply mb-6;
+}
