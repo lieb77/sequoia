@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import type { PhotoData } from '@/lib/types'
+import type { PhotoData } from './photos'
 
 export   const Slideshow = ({ images, interval = 4000 } : {images: PhotoData[]; interval: number}) => {
 	const [currentIndex, setCurrentIndex] = useState(0);

@@ -1,14 +1,18 @@
 // /pictures/page.tsx
-import { Layout } from '@/components/Layout'
-import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from "@/lib/getphotos"
-import { PhotoData, Photos } from '@/class/Photos'
-import { Event, Events } from '@/class/Events'
-// import { Slideshow } from '@/component/Slideshow'
-import { CatSelect } from '@/components/CatSelect'
-import { EventSelect } from '@/components/EventSelect'
+import { Layout } from "@/components/Layout"
 import { Suspense } from 'react';
-
 import { ReactSlideshow } from '@/components/ReactSlideshow'
+import { 
+		fetchPhotosByTag, 
+		fetchFamilyEvents, 
+		fetchPhotosByEvent, 
+		PhotoData, 
+		Photos, 
+		CatSelect, 
+		EventSelect,
+		Event,
+		Events 
+	} from "@/features/photos"
 
 
 export const dynamic = 'force-dynamic'
@@ -56,22 +60,14 @@ export default async function Pictures(props: {
   }
 
   return (
-    <Layout>
-    	<CatSelect options={categories} current={category}/>
-        <ReactSlideshow images={photos} interval={6000} />
-    </Layout>
-
-  )  
+	   <Layout>
+		  <Suspense>
+			<CatSelect options={categories} current={category}/>
+			{category === "Family" &&
+			  <EventSelect options={events} current={event}/>
+			}
+			<ReactSlideshow images={photos} interval={6000} />
+		  </Suspense>
+		</Layout>
+	 )  
 }
-
-/*
-   <Layout>
-      <Suspense>
-        <CatSelect options={categories} current={category}/>
-        {category === "Family" &&
-          <EventSelect options={events} current={event}/>
-        }
-        <ReactSlideshow images={photos} interval={6000} />
-      </Suspense>
-    </Layout>
-*/

@@ -4,7 +4,7 @@
  */
 import { Layout } from '@/components/Layout'
 import { Rides } from '@/features/ride'
-import { Photos } from '@/class/Photos'
+import { Photos } from '@/features/photos'
 import { Tours, Tour, fetchTour, fetchRidesByTour, fetchPhotosForTour } from '@/features/tour'
 
 export default async function Page(props: {

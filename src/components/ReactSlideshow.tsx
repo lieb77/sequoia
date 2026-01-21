@@ -1,12 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { PhotoData } from "@/features/photos"
 
-import { images } from '@/lib/images'
-
+import "@/features/photos/photos.css"
 import 'swiper/css'
 import 'swiper/css/bundle'
 

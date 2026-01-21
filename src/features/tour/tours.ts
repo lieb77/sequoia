@@ -38,7 +38,7 @@ export class Tours {
       days: tour.field_number_of_days,
       descr: (tour.field_short_description) ? tour.field_short_description.value : "Tour description",
       miles: tour.field_mileage,
-      map: (tour.field_overview_map.field_media_image) && base + tour.field_overview_map.field_media_image.uri.url,
+      map: (tour?.field_overview_map?.field_media_image) && base + tour.field_overview_map.field_media_image.uri.url,
       body: (tour.body) && fixUrls(tour.body.processed),
       rides: rides,
       photos: photos,

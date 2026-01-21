@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+	.photos-nav,
+	.events-nav  {
+	  color: darkblue;
+	}
+
+	.slideshow img {
+	  height: 80vh;
+	  width: auto;
+	  object-fit: contain;
+	}
+
+
+}

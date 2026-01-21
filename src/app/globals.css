@@ -5,10 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @import '../features/ride/ride.css';
 @import '../features/bike/bikes.css';
 @import '../features/blog/blog.css';
 @import '../features/tour/tour.css';
+@import '../features/about/about.css';
+@import '../features/photos/photos.css';
 
 :root {
   --background: #ffffff;
@@ -29,9 +32,6 @@
   }
 }
 
-.photos-nav {
-  color: darkblue;
-}
 
 body {
   background: var(--background);
@@ -154,10 +154,12 @@ h4 {
 }
 
 .slideshow img {
-  height: 80vh;
-  width: auto;
-  object-fit: contain;
-}
+	  height: 80vh;
+	  width: auto;
+	  object-fit: contain;
+	}
+
+
 
 /* global.css or similar */
 @media (max-width: 768px) {
