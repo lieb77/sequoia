@@ -15,7 +15,7 @@
 }
 
 .ridenavForm {
-	@apply inline-block border-gray-800 p-2 m-2
+	@apply inline-block border-gray-800 p-2 m-2 text-black;
 }
 
 .ridenavYear {
@@ -32,38 +32,3 @@
 	@apply mr-2 p-1
 }
 
-.statsContainer {
-	background-color: #0c090980;
-	border: 1px solid #557;
-	border-radius: 8px;
-	color: #fff;
-	margin: 1em;
-	padding: 1em;
-}
-
-.summaryTable {
-	margin-bottom: 1em;
-	border-bottom: 1px solid #557;
-}
-.summaryTable th,
-.summaryTable td {
-	text-align: left;
-	padding: 0 .2em;
-}
-
-
-.statsTable {
-	border: 1px solid #557;
-	padding: 1em;
-	min-width: 50vw;
-}
-
-.statsTable tr {
-	border: 1px solid #557;
-}
-
-.statsTable th,
-.statsTable td {
-	border: 1px solid #557;
-	text-align: left;
-}

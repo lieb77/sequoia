@@ -2,10 +2,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Slideshow } from '@/components/Slideshow'
-import type { TourDataShort, TourData } from "./tours"
+import type { TourDataShort, TourData } from "./types"
 
 
 export function Tour({tour}: {tour: TourData} ){
+
   return(
     <div key={tour.id} className="flex flex-row warpme">
       <div className="basis-1/4 m-4 warpme">
@@ -28,7 +29,9 @@ export function Tour({tour}: {tour: TourData} ){
             <h3>{ride.title}</h3>
             <p>Date: {ride.date}</p>
             <p>Miles: {ride.miles}</p>
-            <div dangerouslySetInnerHTML={{ __html: ride.body }} />
+            <div>
+            	<div dangerouslySetInnerHTML={{ __html: ride.body}} />
+            </div>
           </div>
         )}
       </div>

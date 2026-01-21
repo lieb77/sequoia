@@ -1,10 +1,11 @@
 /**
  * Fetch all rides for given year
  *
- */ 
+ */
 import { client } from "@/lib/api"
 import { currentYear } from '@/lib/utils'
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import { DrupalNode } from "next-drupal"
 
 export async function fetchRidesByYear(year): Promise<Ride[]> {
     const params = new DrupalJsonApiParams()
@@ -17,9 +18,9 @@ export async function fetchRidesByYear(year): Promise<Ride[]> {
     let nextUrl = null;
 
     // Initial fetch for the first 50 nodes
-    const firstPage = await client.getResourceCollection("node--ride", {
+    const firstPage = await client.getResourceCollection<DrupalNode[]>("node--ride", {
         params: params.getQueryObject(),
-        deserialize: false, 
+        deserialize: false,
     })
 
     allData = [...firstPage.data];
@@ -67,7 +68,7 @@ function mapRides({nodes}) {
 			body:    ride.body ? fixUrls(ride.body.processed) : "No notes",
 		})
 	})
-	return ridesArray		
+	return ridesArray
 }
 
 

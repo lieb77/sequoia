@@ -46,7 +46,7 @@ export default async function Pictures(props: {
   else if (event !== "All"){
     const params = new URLSearchParams(searchParams);
     params.delete('event');
-    const newUrl = "https://bsky.paullieberman.net/pictures?category=" + category
+    const newUrl = "https://live.paullieberman.net/pictures?category=" + category
     redirect(newUrl);
   }
 

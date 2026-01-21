@@ -1,5 +1,5 @@
 
-interface Ride {
+export interface Ride {
 	id: string
 	title:    string
 	miles:    number
@@ -11,14 +11,14 @@ interface Ride {
 }
 
 
-interface Stats {
+export interface Stats {
   total:   number,
   num:     number,
   longest: number,
   avg:     number,
 }
 
-interface JsonRide{
+export interface JsonRide{
   id: string,
 	title: string,
 	field_miles: number,

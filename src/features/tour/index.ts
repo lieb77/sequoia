@@ -1,5 +1,5 @@
 export * from "./gettours"
-export * from "./tour"
+export * from "./components/tour"
 export * from "./tours"
 
 

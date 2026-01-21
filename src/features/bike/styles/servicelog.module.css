@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.serviceLog {
+	@apply  bg-dark-glass border border-glass-border rounded-glass p-2 text-white max-w-6xl;
+}
+
+.bikeService {
+	@apply shadow-glass border border-glass-border rounded-glass p-2 my-2 text-white; 
+}
+
+.serviceBody p {
+	@apply: mb-4;
+}

@@ -3,19 +3,20 @@
  *
  */
 import { Layout } from '@/components/Layout'
-import { fetchTourIndex, TourIndex, ToursShort } from '@/features/tour'
+import { Tours, TourIndex } from '@/features/tour'
 
 export default async function Page() {
 
-  const data      = await fetchTourIndex()
-  const toursObj  = new ToursShort(data)
-  const tourIndex = toursObj.getTourIndex()
 
-  return (
-    <Layout>
-      <main className="flex flex-col p-4">
-      <TourIndex tours={tourIndex} />
-      </main>
-    </Layout>
-  );
+ 	// Fetch all the data
+	  const tourClass  = new Tours()    
+	  const tourIndex  = await tourClass.getTourIndex()
+
+  	return (
+    	<Layout>
+      		<main className="flex flex-col p-4">
+      			<TourIndex tours={tourIndex} />
+      		</main>
+    	</Layout>
+  	);
 }

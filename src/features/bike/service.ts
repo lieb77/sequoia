@@ -7,35 +7,33 @@
  * Public methods provide access to the data
  *
  */
+import { client } from "@/lib/api"
 import { fixUrls } from "@/lib/utils"
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import { DrupalNode } from "next-drupal"
+import type { Service, JsonService } from "./types"
 
-export interface Service {
-	id:    string
-	title:  string
-	date: string
-	body:  string
-	miles: number
-}
 
-export interface JsonService {
-  id: string,
-	title: string,
-	field_date1: string,
-	body: {
-	  processed: string
-  },
-	field_milage: number,
-}
+export class Service {
 
-export class ServiceLog {
+	bike: string = "Grando"
 
-	slog: Service[] = []
+	// Constructor 
+	constructor(bikeName) {
+		this.bike = bikeName
+	}
 
-	// Constructor is passed raw data from JSON:API
-	constructor(data: JsonService[]) {
+    /*
+     * Return structured data
+     *
+     */
+	public async getServiceLog() : Service[] {
+		const slog: Service[] = []
 
-		data.forEach((service: JsonService) => {
-			this.slog.push({
+		const nodes = await this.fetchServiceLog()
+
+		nodes.forEach((service: JsonService) => {
+			slog.push({
 				id: service.id,
 				title: service.title,
 				date: service.field_date1,
@@ -43,11 +41,25 @@ export class ServiceLog {
 				miles: service.field_milage1,
 			})
 		})
+		return slog
 	}
 
-	// Return all rides
-	public getServiceLog() : Service[] {
-		return this.slog
+
+	/*
+	 * fetch Service Log
+	 *
+	 */
+	 private async fetchServiceLog(): Promise<JsonService> {
+	
+		const params = new DrupalJsonApiParams()
+			.addFields("node--service", ['title', 'body', 'field_bike', 'field_milage1', 'field_date1'])
+			.addSort('created', 'DESC')
+			.addInclude('field_bike')
+			.addFilter('field_bike.title', this.bike)
+	
+	
+		const nodes = await client.getResourceCollection<DrupalNode[]>("node--service", {params: params.getQueryObject() })
+		return nodes
 	}
 
 }

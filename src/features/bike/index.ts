@@ -1,6 +1,8 @@
-export * from "./getbikes"
-export * from "./bikes"
-export * from "./nav"
+export * from "./components/bike"
+export * from "./components/nav"
+export * from  "./components/servicelog"
 export * from "./service"
-export * from "./servicelog"
+export * from "./bikes"
+
+export const bikeNames = ['Grando', 'Ravn', 'Soma Saga']
 

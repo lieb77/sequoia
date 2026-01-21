@@ -7,9 +7,9 @@ export function YearlyReport({ data }) {
   const { tableRows, stats, uniqueBikes } = data;
 
   return (
-    <div className="stats-container">
-      <header className="summary-grid">
-       	<table className="summary-table">
+    <div className={styles.statsContainer}>
+      <header className={styles.summaryGrid}>
+       	<table className={styles.summaryTable}>
 			<tbody>
           		<tr>
           			<th>Total miles</th>
@@ -31,7 +31,7 @@ export function YearlyReport({ data }) {
       	</table>
       </header>
 
-      <table className="stats-table">
+      <table className={styles.statsTable}>
         <thead>
           <tr>
             <th>Month</th>
@@ -46,7 +46,7 @@ export function YearlyReport({ data }) {
               {uniqueBikes.map(bike => (
                 <td key={bike}>{ row.bikes[bike] || 0}</td>
               ))}
-              <td className="font-bold">{row.total}</td>
+              <td className={styles.statsBold}>{row.total}</td>
             </tr>
           ))}
         </tbody>

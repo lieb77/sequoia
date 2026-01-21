@@ -1,7 +1,7 @@
 // /lib/gettours.tsx
 import { client } from "@/lib/api"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
-
+import { DrupalNode, DrupalMedia } from "next-drupal"
 
 /**
  * fetchTourIndex
@@ -14,10 +14,10 @@ export async function fetchTourIndex() {
 	const params = new DrupalJsonApiParams()
 		.addFields("node--tour", ['title','body', 'field_mileage', 'field_start_date', 'field_number_of_days', 'field_short_description'  ])
 		.addSort('field_start_date', 'DESC')
-	
 
 
-  	const nodes = await client.getResourceCollection("node--tour", {params: params.getQueryObject() })
+
+  	const nodes = await client.getResourceCollection<DrupalNode[]>("node--tour", {params: params.getQueryObject() })
 
 	return(nodes)
 }
@@ -34,8 +34,8 @@ export async function fetchTour(id: string) {
 	const params = new DrupalJsonApiParams()
 		.addFields("node--tour", ['title','body', 'field_start_date', 'field_mileage', 'field_number_of_days', 'field_short_description', 'field_overview_map'  ])
 		.addInclude('field_overview_map.field_media_image')
-		
-	const node = await client.getResource("node--tour", id, {params: params.getQueryObject() })
+
+	const node = await client.getResource<DrupalNode>("node--tour", id, {params: params.getQueryObject() })
 
   	return(node)
 }
@@ -52,8 +52,8 @@ export async function fetchRidesByTour(id: string) {
  		.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
     	.addFilter("field_tour.id", id )
     	.addInclude(['field_tour'])
-    	
-	const nodes = await client.getResourceCollection("node--ride", {params: params.getQueryObject() })
+
+	const nodes = await client.getResourceCollection<DrupalNode[]>("node--ride", {params: params.getQueryObject() })
     return(nodes)
 }
 

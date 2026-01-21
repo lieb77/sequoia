@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .rideContainer {
-	@apply bg-dark-glass border border-glass-border rounded-glass p-2 text-white max-w-4xl;
+	@apply bg-dark-glass border border-glass-border rounded-glass p-2 text-white max-w-6xl;
 }
 
 .rideItem {

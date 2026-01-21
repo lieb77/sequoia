@@ -3,6 +3,8 @@
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
+import styles from '../styles/bikenav.module.css';
+
 
 export function BikeNav({bikes}) {
 	const searchParams = useSearchParams()
@@ -17,10 +19,10 @@ export function BikeNav({bikes}) {
 
 
 	return(
-		<div className="bike-nav">
+		<div className={styles.bikeNav}>
 			{bikes.map(bike =>
 				<button key={bike} onClick={() =>  goToBike(bike)}
-					className="bike-nav-button" >
+					className={styles.bikeNavButton} >
 					{bike}
 				</button>
 			)}

@@ -1,12 +1,13 @@
 /* components/RideTable */
 
-import styles from './ride.module.css';
+import styles from '../styles/ridelist.module.css';
+
 
 function TableRow({ ride }: JSX.Element ) {
   return (
     <tr key={ride.id}>
     	<td>{ride.date}</td>
-    	<td className="ride-column">{ride.title}</td>
+    	<td className={styles.rideColumn}>{ride.title}</td>
     	<td>{ride.bike}</td>
     	<td>{ride.miles}</td>
     </tr>
@@ -21,7 +22,7 @@ function TableFoot({ rides }: JSX.Element ){
 	return (
 		<tfoot>
 			<tr>
-				<th className="ride-col-right" colSpan="3">Total</th>
+				<th className={styles.rideColRight} colSpan="3">Total</th>
 				<td>{total}</td>
 			</tr>
 		</tfoot>
@@ -30,9 +31,9 @@ function TableFoot({ rides }: JSX.Element ){
 
 export function RideTable({ rides }: JSX.Element ){
 	return(
-		<table className="ride-table warpme">
+		<table className={styles.rideTable warpme}>
 			<thead>
-				<tr><th>Date</th><th className="ride-column">Route</th><th>Bike</th><th>Miles</th></tr>
+				<tr><th>Date</th><th className={styles.rideColumn}>Route</th><th>Bike</th><th>Miles</th></tr>
 			</thead>
 			<tbody>
 				{rides.map(ride =>

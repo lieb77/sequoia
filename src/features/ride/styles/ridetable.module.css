@@ -1,87 +1,23 @@
 
+@reference "../../../app/globals.css";
 
 
-.ridenav-form {
-	border-left: 1px solid #777;
-	border-right: 1px solid #777;
-	margin: 0 1em;
-	padding: 1em;
-
+.rideTable {
+	min-width: 90vw;
 }
 
-.ridenav-year {
-	border: 1px solid #777;
-	background-color: $fff;
-	padding: .5em 0;
+.rideTable .rideColumn {
+	min-width: 30vw;
 }
 
-.ridenav-view {
-	display: inline-block;
-	text-align: center;
-	color: darkblue;
-}
-
-
-.stats-container {
-	background-color: #0c090980;
-	border: 1px solid #557;
-	border-radius: 8px;
-	color: #fff;
-	margin: 1em;
-	padding: 1em;
-}
-
-.summary-table {
-	margin-bottom: 1em;
-	border-bottom: 1px solid #557;
-}
-.summary-table th,
-.summary-table td {
-	text-align: left;
-	padding: 0 .2em;
-}
-
-
-.stats-table {
-	border: 1px solid #557;
-	padding: 1em;
-	min-width: 50vw;
-}
-
-.stats-table tr {
-	border: 1px solid #557;
-}
-
-.stats-table th,
-.stats-table td {
-	border: 1px solid #557;
-	text-align: left;
-}
-
-#ridediv {
-	max-width: 60vw;
-}
-
-#ridediv img {
-	max-width: 400px;
-}
-
-.ride-table {
-	min-width: 900px;
-}
-
-.ride-table .ride-column {
-	min-width: 340px;
-}
-
-.ride-col-right {
+.rideColRight {
 	text-align: right;
 }
 
-.ride-table,
-.ride-table tr,
-.ride-table th,
-.ride-table td {
+.rideTable,
+.rideTable tr,
+.rideTable th,
+.rideTable td {
 	border: 1px solid #aaa;
 	padding: .2em .5em;
 }

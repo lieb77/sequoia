@@ -2,6 +2,7 @@
 import { client } from "@/lib/api"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { fixUrls, formatDate } from "@/lib/utils"
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 
 export async function fetchBlog() {
 
@@ -10,16 +11,16 @@ export async function fetchBlog() {
         .addSort("created", "DESC")
         .addInclude('field_tags')
         .addPageLimit('5')
-        
-     const response = await client.getResourceCollection("node--blog", {
-     	params: params.getQueryObject(), 
-  		deserialize: false, 
-	})   
-	
+
+     const response = await client.getResourceCollection<DrupalNode>("node--blog", {
+     	params: params.getQueryObject(),
+  		deserialize: false,
+	})
+
 	// Get the data
-	const links = response.links  
+	const links = response.links
  	const nodes = client.deserialize(response)
- 	
+
  	// Extract and process the data
  	const posts  = []
     nodes.forEach((post) =>
@@ -31,14 +32,14 @@ export async function fetchBlog() {
 			body: fixUrls(post.body.processed),
 			tags: post.field_tags[0].name,
       })
-    )    
- 	
+    )
+
  	// return the data
  	return({posts, links})
 }
 
 
 export async function fetchTags() {
-  const data = await client.getResourceCollection("taxonomy_term--tags")
+  const data = await client.getResourceCollection<DrupalTaxonomyTerm[]>("taxonomy_term--tags")
   return data
 }
