@@ -3,6 +3,7 @@
  *
  */ 
 import { client } from "@/lib/api"
+import { currentYear } from '@/lib/utils'
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
 export async function fetchRidesByYear(year): Promise<Ride[]> {
@@ -43,6 +44,46 @@ export async function fetchRidesByYear(year): Promise<Ride[]> {
     };
 
     // 4. Deserialize into clean objects
-    return client.deserialize(fullDocument);
+    const nodes = client.deserialize(fullDocument);
+    const rides =  mapRides({nodes})
+    if(year == currentYear)
+    	return sortDesc(rides)
+  	else
+    	return sortAsc(rides)
 }
+
+
+
+function mapRides({nodes}) {
+	const ridesArray = []
+    nodes.forEach((ride) => {
+		ridesArray.push({
+			id:	     ride.id,
+			title:   ride.title,
+			miles:   ride.field_miles,
+			date:    ride.field_ridedate,
+			bike:    ride.field_bike.title,
+			buddies: ride.field_buddies,
+			body:    ride.body ? fixUrls(ride.body.processed) : "No notes",
+		})
+	})
+	return ridesArray		
+}
+
+
+function sortAsc({rides}) {
+	rides.sort((a, b) => {
+		return new Date(a.date).getTime() - new Date(b.date).getTime();
+	});
+	return rides
+}
+
+function sortDesc({rides}) {
+	rides.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+	return rides
+}
+
+
 

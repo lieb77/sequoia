@@ -1,28 +1,16 @@
-import Image from "next/image";
+
 import { Layout } from '@/components/Layout'
 import { fetchAboutPage, About } from '@/features/about'
 
 export default async function Page() {
 
-  const data = await fetchAboutPage()
-
-  return (
- 	  <Layout>
-      <h1>About Paul Lieberman</h1>
-        <div className="h-card warpme max-w-4xl">
-          <p>
-              <span className="hidden p-name">Paul Lieberman</span>
-              <span className="hidden p-nickname">lieb</span>
-              <Image alt="Paul Lieberman" className="u-photo" src="/head6.png.webp" width={77} height={100} />
-              <a className="hidden u-url" href="https://paullieberman.org" rel="me">Website</a>
-              <a className="hidden u-email" href="mailto:lieb@paullieberman.net">eMail</a>
-          </p>
-          <div className="p-note">
-            <About data={data} />
-          </div>
-        </div>
-    </Layout>
-  );
+	const data = await fetchAboutPage()
+	
+	return (
+		<Layout>      
+			<About data={data} />
+		</Layout>
+	)
 }
 
 

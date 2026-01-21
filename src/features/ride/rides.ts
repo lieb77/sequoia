@@ -10,55 +10,28 @@
  * Public methods provide access to the data
  *
  */
-import { base } from "@/lib/api"
+import { base, client } from "@/lib/api"
 import { fixUrls } from "@/lib/utils"
+import { currentYear } from '@/lib/utils'
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
-interface Ride {
-	id: string
-	title:    string
-	miles:    number
-	date:     string
-	bike:     string
-	buddies?: string
-	body:     string
-	link:     string
-}
+import {  Ride, Stats, JsonRide } from "../types.ts"
 
-
-interface Stats {
-  total:   number,
-  num:     number,
-  longest: number,
-  avg:     number,
-}
-
-interface JsonRide{
-  id: string,
-	title: string,
-	field_miles: number,
-	field_ridedate: string,
-	field_bike: {
-	  title: string
-	},
-	field_buddies: string,
-	body: {
-	  processed: string
-	},
-	path: {
-	  alias: string
-	}
-}
 
 export class Rides {
 
 	ridesArray: Ride[] = []
-	totalMiles = 0
-	numRides = 0
-	longest = 0
-	avgMiles = 0
+	year: string 
 	
 	// Constructor is passes raw data from JSON:API
-	constructor(data: JsonRide[]) {
+	constructor(year: string) {
+		this.year = year
+	}
+	
+	// Return all rides
+	public async  getRides() : Ride[] {
+
+		const data = await this.fetchRidesByYear(this.year)
 
 		data.forEach((ride:JsonRide) =>
 		{
@@ -71,15 +44,17 @@ export class Rides {
 				buddies: ride.field_buddies,
 				body:    ride.body ? fixUrls(ride.body.processed) : "No notes",
 			})
-			this.totalMiles += ride.field_miles
-			this.numRides++
-			if (ride.field_miles > this.longest)
-			  this.longest = ride.field_miles
 		})
-		this.avgMiles = Math.round(this.totalMiles / this.numRides)
-		
+		if (this.year == currentYear ){
+			this.sortDesc
+		}
+		else {
+			this.sortAsc}
+	
+		return this.ridesArray
 	}
 	
+	// Return yearly stats
 	public getYearlyStats() {
 	
 		const rides = this.ridesArray
@@ -125,78 +100,65 @@ export class Rides {
 			uniqueBikes: [...new Set(rides.map(r => r.bike).filter(Boolean))]
 		};
 	}
+	
+	/* Privare functions -------------------------------- */
 
-	public sortAsc() : void {
+	private sortAsc() : void {
 		this.ridesArray.sort((a, b) => {
 		  return new Date(a.date).getTime() - new Date(b.date).getTime();
 		});
 	}
 
-	public sortDesc() : void {
+	private sortDesc() : void {
 		this.ridesArray.sort((a, b) => {
 		  return new Date(b.date).getTime() - new Date(a.date).getTime();
 		});
 	}
 
-	// Return all rides
-	public getRides() : Ride[] {
-		return this.ridesArray
-	}
-
-	// Return the totals
-	public getStats() : Stats {
-
-		return ({
-			total:   this.totalMiles,
-			num:     this.numRides,
-			longest: this.longest,
-			avg:     this.avgMiles,
+	
+	private async fetchRidesByYear(year): Promise<Ride[]> {
+		const params = new DrupalJsonApiParams()
+			.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
+			.addFilter("field_ridedate",year, 'STARTS_WITH' )
+			.addInclude(['field_bike'])
+	
+		let allData = [];
+		let allIncluded = [];
+		let nextUrl = null;
+	
+		// Initial fetch for the first 50 nodes
+		const firstPage = await client.getResourceCollection("node--ride", {
+			params: params.getQueryObject(),
+			deserialize: false, 
 		})
-
-	}
-
-
-
-
 	
-}	
+		allData = [...firstPage.data];
+		if (firstPage.included) allIncluded = [...firstPage.included];
+		nextUrl = firstPage.links?.next?.href;
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- * Stats not yet implemented in this version
-
-	// Tally up miles per bike
-	public getStatsByBike() : [] {
-		const rides = []
-		this.ridesArray.forEach(ride =>
-			ride.bike in rides
-			?	rides[ride.bike] += ride.miles
-			: rides[ride.bike] = ride.miles
-		)
-
-		const byBikeArray: Bike[] = []
-
-		for (const key in rides) {
-			byBikeArray.push({
-				bike: key,
-				miles: rides[key],
-			})
+		// Loop to follow links.next
+		while (nextUrl) {
+			const response = await fetch(nextUrl);
+			const page = await response.json();
+	
+			allData = [...allData, ...page.data];
+			if (page.included) allIncluded = [...allIncluded, ...page.included];
+			nextUrl = page.links?.next?.href;
 		}
-		return byBikeArray
+	
+		// Construct a complete JSON:API document for Jsona
+		// Jsona needs a single object with the 'data' and 'included' keys
+		const fullDocument = {
+			data: allData,
+			included: allIncluded
+		};
+	
+		// 4. Deserialize into clean objects
+		return  client.deserialize(fullDocument);
 	}
 
+}
 
-
-*/
+	
+	
+	

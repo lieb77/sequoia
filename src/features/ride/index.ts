@@ -1,11 +1,8 @@
-export * from "./getrides"
-export * from "./ridenav"
 export * from "./rides"
-export * from "./rideslayout"
-export * from "./ridetable"
-export * from "./rideview"
-export * from "./statslayout"
-export * from "./yearly"
+export * from "./components/rideview"
+export * from "./components/ridelist"
+export * from "./components/ridenav"
+export * from "./components/yearly"
 
 
 
