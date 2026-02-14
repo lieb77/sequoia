@@ -1,6 +1,6 @@
 /* component/RideLayout */
 
-import styles from '../styles/ridelist.module.css';
+import styles from '../_styles/ridelist.module.css';
 
 export function RideList({ rides }: JSX.Element){
 	return(

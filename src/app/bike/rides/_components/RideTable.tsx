@@ -1,6 +1,6 @@
 /* components/RideTable */
 
-import styles from '../styles/ridelist.module.css';
+import styles from '../_styles/ridelist.module.css';
 
 
 function TableRow({ ride }: JSX.Element ) {
@@ -31,7 +31,7 @@ function TableFoot({ rides }: JSX.Element ){
 
 export function RideTable({ rides }: JSX.Element ){
 	return(
-		<table className={styles.rideTable warpme}>
+		<table className={styles.rideTable}>
 			<thead>
 				<tr><th>Date</th><th className={styles.rideColumn}>Route</th><th>Bike</th><th>Miles</th></tr>
 			</thead>

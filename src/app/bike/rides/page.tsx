@@ -1,8 +1,8 @@
 // /rides/page.tsx
 import { Layout } from '@/components/Layout'
 import { currentYear } from '@/lib/utils'
-import { Suspense } from 'react';
-import { RideView, RideNav, Rides} from '@/features/ride'
+import { RideView, RideNav } from './_components'
+import { Rides } from './rides'
 
 export default async function Page(props: {
 	searchParams?: Promise<{
@@ -22,9 +22,7 @@ export default async function Page(props: {
 		<Layout>
 			<h1>Rides {year}</h1>
 			<RideNav />
-			<Suspense>
 				<RideView view={view} stats={stats} rides={myRides}/>
-			</Suspense>
 		</Layout>
 	)
 }

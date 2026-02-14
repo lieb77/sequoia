@@ -14,7 +14,7 @@ import { base, client } from "@/lib/api"
 import { fixUrls, currentYear  } from "@/lib/utils"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
-import type { Ride, Stats, JsonRide } from "../types.ts"
+import type { Ride, Stats, JsonRide } from "./_lib/types.ts"
 
 
 export class Rides {

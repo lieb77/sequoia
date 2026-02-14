@@ -1,5 +1,5 @@
 
-import styles from '../styles/yearly.module.css';
+import styles from '../_styles/yearly.module.css';
 
 
 export function YearlyReport({ data }) {

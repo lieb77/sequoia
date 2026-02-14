@@ -14,6 +14,10 @@ export class DrupalClient extends ApiClient {
     async getResourceCollection<T>(resourceType: string, options?: any): Promise<T[]> {
         return this.client.getResourceCollection<T>(resourceType, options);
     }
+    
+     async getResource<T>(resourceType: string, options?: any): Promise<T[]> {
+        return this.client.getResource<T>(resourceType, options);
+    }
     // ... other methods using this.client
 }
 export const client = new DrupalClient(base);
