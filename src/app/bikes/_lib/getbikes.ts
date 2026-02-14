@@ -1,9 +1,8 @@
 // /lib/getrides.tsx
-import { client } from "@/lib/api"
-import type { JsonBike  } from "./bikes"
-import type { JsonService } from "./service"
+import { client } from "@/lib/api/drupalClient"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalNode } from "next-drupal"
+import type { JsonBike, JsonService } from "./types"
 
 
 /*
@@ -30,7 +29,7 @@ export async function fetchBikes(): Promise<JsonBike[]> {
  * Returns one bike by name
  *
  */
- export async function fetchBike(bike: string): Promise<JsonBike> {
+ export async function getBikeByName(bike: string): Promise<JsonBike> {
 
   	const params = new DrupalJsonApiParams()
  		.addFields("node--bicycle", ['title','body','field_make', 'field_model','field_purchased_from','field_year', 'field_bicycle_picture'])

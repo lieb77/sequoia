@@ -3,7 +3,7 @@
  */
 import Image from "next/image"
 
-import styles from '../styles/bike.module.css';
+import styles from './bike.module.css';
 
 export async function Bike({bike}) {
 

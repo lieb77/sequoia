@@ -1,5 +1,6 @@
-/* /lib/utils */
-import { base } from "@/lib/api"
+// src/lib/utils.ts
+import DOMPurify from 'dompurify'
+import { base } from '@/lib/api'
 
 export function parseDate(dateString: string) : [] {
     const dateParts = dateString.split('-');
@@ -23,6 +24,10 @@ export function getLongMonthNames(): string[] {
   }
 
   return monthNames;
+}
+
+export function sanitizeHTML(html: string): string {
+    return DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
 }
 
 
