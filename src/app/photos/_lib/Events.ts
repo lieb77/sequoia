@@ -13,7 +13,6 @@ export interface Event {
 
 
 export class Events {
-
 	eventsArray: Event[] = []
 
 	// Constructor is passes raw data from JSON:API
@@ -27,7 +26,7 @@ export class Events {
 		})
 	}
 
-	// Return all rides
+	// Return all events
 	public getEvents() : Event[] {
 		return this.eventsArray
 	}

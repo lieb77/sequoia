@@ -3,10 +3,10 @@
  *
  */
 import { Layout } from '@/components/Layout'
-import { Tours, TourIndex } from '@/features/tour'
+import { Tours } from './_lib/Tours'
+import { TourIndex } from './_components/tour'
 
 export default async function Page() {
-
 
  	// Fetch all the data
 	  const tourClass  = new Tours()    

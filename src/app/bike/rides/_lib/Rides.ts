@@ -10,8 +10,9 @@
  * Public methods provide access to the data
  *
  */
-import { base, client } from "@/lib/api"
-import { fixUrls, currentYear  } from "@/lib/utils"
+import { client } from "@/lib/api/drupalClient"
+import { base, currentYear } from "@/lib/constants"
+import { fixUrls } from "@/lib/utils"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
 import type { Ride, Stats, JsonRide } from "./_lib/types.ts"

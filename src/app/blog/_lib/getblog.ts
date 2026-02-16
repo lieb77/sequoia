@@ -1,5 +1,5 @@
 // /lib/getblog.tsx
-import { client } from "@/lib/api"
+import { client } from "@/lib/api/drupalClient"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { fixUrls, formatDate } from "@/lib/utils"
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"

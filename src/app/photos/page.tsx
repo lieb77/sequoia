@@ -2,22 +2,14 @@
 import { Layout } from "@/components/Layout"
 import { Suspense } from 'react';
 import { ReactSlideshow } from '@/components/ReactSlideshow'
-import { 
-		fetchPhotosByTag, 
-		fetchFamilyEvents, 
-		fetchPhotosByEvent, 
-		PhotoData, 
-		Photos, 
-		CatSelect, 
-		EventSelect,
-		Event,
-		Events 
-	} from "@/features/photos"
+import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from './_lib/getphotos'
+import { PhotoData, Photos } from './_lib/Photos'
+import { Event, Events } from './_lib/Events'
+import { CatSelect } from './_components/CatSelect'
+import { EventSelect } from './_components/EventSelect'
 
 
-export const dynamic = 'force-dynamic'
-
-export default async function Pictures(props: {
+export default async function photosPage(props: {
   searchParams?: Promise<{
     category?: string,
     event?: string}>

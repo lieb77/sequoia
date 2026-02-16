@@ -4,7 +4,7 @@
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
-import { currentYear, minYear } from '@/lib/utils'
+import { currentYear, minYear } from '@/lib/constants'
 
 import styles from '../_styles/ridenav.module.css';
 

@@ -1,5 +1,5 @@
 // /lib/geabout.tsx
-import { client } from "@/lib/api"
+import { client } from "@/lib/api/drupalClient"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalNode } from "next-drupal"
 

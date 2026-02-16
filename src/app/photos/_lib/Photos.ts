@@ -1,5 +1,5 @@
 // /class/Photos.tsx
-import { base } from '@/lib/api'
+import { base } from '@/lib/constants'
 
 export interface PhotoData {
   id:   string,
@@ -34,7 +34,5 @@ export class Photos {
   public getPhotos() : PhotoData[] {
     return this.Photos
   }
-
-//end-of-class
 }
 

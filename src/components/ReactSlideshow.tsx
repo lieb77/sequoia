@@ -3,9 +3,9 @@
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import { PhotoData } from "@/features/photos"
+import { PhotoData } from "@/app/photos/_lib/Photos"
 
-import "@/features/photos/photos.css"
+import "@/app/photos/photos.css"
 import 'swiper/css'
 import 'swiper/css/bundle'
 

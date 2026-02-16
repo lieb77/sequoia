@@ -1,8 +1,8 @@
 // /rides/page.tsx
 import { Layout } from '@/components/Layout'
-import { currentYear } from '@/lib/utils'
+import { currentYear } from '@/lib/constants'
 import { RideView, RideNav } from './_components'
-import { Rides } from './rides'
+import { Rides } from './_lib/Rides'
 
 export default async function Page(props: {
 	searchParams?: Promise<{

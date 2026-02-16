@@ -28,11 +28,11 @@ export function Navbar()  {
         </div>
         <div className={`lg:flex ${isMenuOpen ? 'block' : 'hidden'} lg:block space-x-4`}>
           <Link href="/about" className="block lg:inline-block">About</Link>
+          <Link href="/blog"  className="block lg:inline-block">Blog</Link>
           <Link href="/bike/bicycles" className="block lg:inline-block">Bicycles</Link>
           <Link href="/bike/rides" className="block lg:inline-block">Rides</Link>
-          <Link href="/tours" className="block lg:inline-block">Tours</Link>
-          <Link href="/pictures"  className="block lg:inline-block">Pictures</Link>
-          <Link href="/blog"  className="block lg:inline-block">Blog</Link>
+          <Link href="/bike/tours" className="block lg:inline-block">Tours</Link>
+          <Link href="/photos"  className="block lg:inline-block">Photos</Link>
         </div>
       </div>
     </nav>

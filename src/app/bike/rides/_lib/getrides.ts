@@ -2,8 +2,8 @@
  * Fetch all rides for given year
  *
  */
-import { client } from "@/lib/api"
-import { currentYear } from '@/lib/utils'
+import { client } from "@/lib/api/drupalClient"
+import { currentYear } from '@/lib/constants'
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalNode } from "next-drupal"
 

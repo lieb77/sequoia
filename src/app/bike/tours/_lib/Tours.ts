@@ -1,13 +1,32 @@
 // /class/Tours.tsx
-import { base, client } from "@/lib/api"
+import { client } from "@/lib/api/drupalClient"
+import { base } from "@/lib/constants"
 import { fixUrls } from "@/lib/utils"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalNode, DrupalMedia } from "next-drupal"
-import { Rides } from "@/features/ride"
-import { Photos, fetchPhotosForTour } from "@/features/photos"
+import { Rides } from "@/app/bike/rides/_lib/Rides"
+import { Photos } from "@/app/photos/_lib/Photos"
+import {  fetchPhotosForTour } from "@/app/photos/_lib/getphotos"
 
-import type { TourData } from "../types"
+export interface TourData {
+  id: string,
+  title: string,
+  date: string,
+  days: number,
+  descr: string,
+  miles: number,
+  map: string,
+  body: string,
+  rides: RideData[],
+  photos: PhotoData[],
+}
 
+export interface TourDataShort {
+  id: string,
+  title: string,
+  date: string,
+  descr: string,
+}
 export class Tours {
 
 	tourId: string = "4ca60095-1f69-458c-a8bc-7c3f8c7561ac"
