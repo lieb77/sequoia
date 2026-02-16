@@ -48,14 +48,13 @@ export function BlogList({ initialNodes, initialLinks }) {
 	  }
 
   	return (
-    	<section className="blog-wrapper">
-      		<div className="blog"> 
+    	<section className="bg-dark-glass place-items-center rounded max-w-4xl">
+      		<div className="p-4"> 
 				{nodes.map((post) => (
-					<div key={post.id} className="post">
+					<div key={post.id} className="bg-dark-glass rounded p-2">
 						<h3>{ post.title }</h3>
 						<p>Date: {(post.date)}</p>
 						<div dangerouslySetInnerHTML={{ __html: post.body }}
-							className="post-body"
 						/>
 						<p>Tags: {post.tags}</p>					
 					</div>          
