@@ -1,7 +1,7 @@
 // gallery/page.tsx
 import { fetchPhotos } from './getphotos'
 import { PhotoCard } from './photocard'
-import { base } from '@/lib/api'
+import { base } from '@/lib/constants'
 
 export default async function Page() {
 

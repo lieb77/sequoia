@@ -1,5 +1,5 @@
 // /
-import { client } from "@/lib/api"
+import { client } from "@/lib/api/drupalClient"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalTaxonomyTerm, DrupalMedia } from "next-drupal"
 
