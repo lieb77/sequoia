@@ -32,7 +32,8 @@ export function Navbar()  {
           <Link href="/bike/bicycles" className="block lg:inline-block">Bicycles</Link>
           <Link href="/bike/rides" className="block lg:inline-block">Rides</Link>
           <Link href="/bike/tours" className="block lg:inline-block">Tours</Link>
-          <Link href="/photos"  className="block lg:inline-block">Photos</Link>
+          <Link href="/photos/gallery"  className="block lg:inline-block">Photo Gallery</Link>
+          <Link href="/photos"  className="block lg:inline-block">Photo Slideshow</Link>
         </div>
       </div>
     </nav>
