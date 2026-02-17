@@ -30,6 +30,17 @@ export default async function BikePage() {
                             <p className="text-lg leading-relaxed">
                                 {content.paragraphs[0]}
                             </p>
+                             <p className="text-lg leading-relaxed">
+                                {content.paragraphs[1]}
+                            </p>
+                              <Image
+                        src={content.images[2]}
+                        width={640}
+                        height={480}
+                        alt="Collage of state welcome signs from my bicycle tours"
+                        className="rounded-xl shadow-lg object-cover my-2"
+                    />
+                     <p className="bg-dark-glass text-center">Some state welcome signs from my bicycle tours.</p>
                         </div>
 
                         {/* Column 3: Second Image */}
@@ -46,16 +57,8 @@ export default async function BikePage() {
                     </div>
                 </section>
                 <div className="place-items-center justify-center min-h-screen p-4">
-                    <Image
-                        src={content.images[2]}
-                        width={640}
-                        height={480}
-                        alt="Collage of state welcome signs from my bicycle tours"
-                        className="rounded-xl shadow-lg object-cover"
-                    />
-                            <p className="bg-dark-glass text-center">
-                                {content.paragraphs[1]}
-                            </p>
+                  
+                           
                 </div>
             </div>
         </Layout>

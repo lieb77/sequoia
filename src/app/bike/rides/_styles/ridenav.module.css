@@ -3,15 +3,15 @@
 
 
 .navButtons {
-	@apply bg-gray-200 border-gray-800 px-2 rounded ;
+	@apply bg-gray-200 border border-gray-600 px-2 mb-2 rounded-lg; 
 }
 
 .navButton {
-	@apply bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded transition-colors duration-300;
+	@apply bg-gray-500 hover:bg-gray-800 text-white font-bold px-4 rounded transition-colors duration-300;
 }
 
 .navText {
-	@apply text-blue-800 p-2;
+	@apply text-gray-800 p-2;
 }
 
 .ridenavForm {
@@ -19,16 +19,18 @@
 }
 
 .ridenavYear {
-	@apply border border-gray-800 rounded p-2 mx-2;
+	@apply bg-white border border-gray-800 rounded p-2 mx-2;
 }
 
 .ridenavView {
-	display: inline-block;
-	text-align: center;
-	color: darkblue;
+	@apply text-gray-800 inline-block text-center;
+}
+
+.ridenavRadio {
+	@apply text-gray-800 rounded-full border border-gray-300 checked:border-gray-400 transition-all;
 }
 
 .ridenavLabel {
-	@apply mr-2 p-1
+	@apply mr-2 p-1 text-gray-800;
 }
 

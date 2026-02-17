@@ -20,7 +20,7 @@ export default async function Page(props: {
 	
 	return (
 		<Layout>
-			<h1>Rides {year}</h1>
+			<h1 className="text-gray-800!">Rides {year}</h1>
 			<RideNav />
 				<RideView view={view} stats={stats} rides={myRides}/>
 		</Layout>

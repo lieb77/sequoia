@@ -82,6 +82,7 @@ export function RideNav() {
         View as:<br />
         <input onChange={() => setView('rides')}
           type="radio"
+          className={styles.ridenavRadio}
           id="blob"
           name="view"
           value="rides"
@@ -90,6 +91,7 @@ export function RideNav() {
         <label className={styles.ridenavLabel} htmlFor="rides">Rides</label>
         <input onChange={() => setView('stats')}
           type="radio"
+          className={styles.ridenavRadio}
           id="table"
           name="view"
           value="stats"
