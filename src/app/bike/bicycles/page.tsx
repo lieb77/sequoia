@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default async function BicyclesPage() {
   return (
-    <div>
+    <div className="bg-dark-glass border-glass-border rounded p-4 place-items-center">
      <p>These are my bicycles</p>
     </div>
   )

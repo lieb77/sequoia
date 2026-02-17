@@ -11,59 +11,51 @@ export default async function BikePage() {
     return (
         <Layout>
             <div className="items-center justify-center min-h-screen p-4 ">
-                <section className="w-full py-12">
+                <section className="w-full">
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                         {/* Column 1: First Image */}
                         <div className="flex-1 w-full">
-                            {content.images[0] ? (
-                                <Image
+                                 <Image
                                     src={content.images[0]}
                                     width={640}
                                     height={480}
-                                    alt="Bike visual primary"
+                                    alt="Riding my bike"
                                     className="rounded-xl shadow-lg object-cover"
                                 />
-                            ) : (
-                                <div className="w-full h-[480px] bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
-                                    No image found
-                                </div>
-                            )}
-                        </div>
+                                <p className="bg-dark-glass text-center">On a local road ride</p>
+                           </div>
 
                         {/* Column 2: First Paragraph */}
                         <div className="flex-1 w-full prose prose-slate bg-dark-glass text-white p-4 rounded">
                             <p className="text-lg leading-relaxed">
-                                {content.paragraphs[0] ||
-                                    'No description available for this model.'}
+                                {content.paragraphs[0]}
                             </p>
                         </div>
 
                         {/* Column 3: Second Image */}
                         <div className="flex-1 w-full">
-                            {content.images[1] ? (
                                 <Image
                                     src={content.images[1]}
                                     width={640}
                                     height={480}
-                                    alt="Bike visual secondary"
+                                    alt="Riding my bike on the Oregon Outback"
                                     className="rounded-xl shadow-lg object-cover"
                                 />
-                            ) : (
-                                <div className="w-full h-[480px] bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
-                                    No secondary image found
-                                </div>
-                            )}
+                                 <p className="bg-dark-glass text-center">On the Oregon Outback in 2022</p>
                         </div>
                     </div>
                 </section>
-                <div className="items-center justify-center min-h-screen p-4">
+                <div className="place-items-center justify-center min-h-screen p-4">
                     <Image
                         src={content.images[2]}
                         width={640}
                         height={480}
-                        alt="Bike visual secondary"
+                        alt="Collage of state welcome signs from my bicycle tours"
                         className="rounded-xl shadow-lg object-cover"
                     />
+                            <p className="bg-dark-glass text-center">
+                                {content.paragraphs[1]}
+                            </p>
                 </div>
             </div>
         </Layout>

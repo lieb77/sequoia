@@ -1,13 +1,5 @@
-@import "tailwindcss";
+@reference "../../app/globals.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-.blog-wrapper {
-    @apply place-items-center;
-}
 
 .blog {
     background-color: #060606b3;
@@ -15,7 +7,11 @@
     max-width: 50vw;
 }
 
-.post {	
+.blogwrapper p {
+    margin-bottom: 2em;
+}
+
+.post {
     border: 1px solid #557;
     border-radius: 8px;
     color: #fff;
@@ -25,7 +21,7 @@
 
 .post-body {
     @apply mt-6 font-serif text-base leading-loose;
-}	
+}
 
 .load-more-btn {
     color: #fff;
@@ -37,17 +33,17 @@
 }
 
 
-.post {	
+.post {
 	border: 1px solid #557;
 	border-radius: 8px;
 	color: #fff;
 	margin: 1em;
 	padding: 1em;
 }
-	
+
 .post-body {
 	margin-top: 1em;
-}	
+}
 
 .post-body p {
 	margin-bottom: .5em

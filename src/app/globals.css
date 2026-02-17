@@ -16,7 +16,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-dark-glass: #0c090980;
+/*  --color-dark-glass: #0c090980; */
+  --color-dark-glass: #0e0a0aa0;
   --color-glass-border: #557;
   --radius-glass: 8px;
   --spacing-ride-gap: 1.5rem;
@@ -67,6 +68,10 @@ h3 {
 h4 {
   font-size: 1rem;
   font-weight: bold;
+}
+
+.blogwrapper p {
+    margin-bottom: 1em;
 }
 
 

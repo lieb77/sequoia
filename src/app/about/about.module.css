@@ -1,5 +1,5 @@
 
-@reference "../../app/globals.css";
+@reference "../globals.css";
 
 .aboutPage {
 	@apply bg-dark-glass border border-glass-border rounded-glass p-4 m-4 text-white max-w-4xl;
@@ -10,7 +10,7 @@
 }
 
 .hCard {
-	
+
 }
 
 .pName,

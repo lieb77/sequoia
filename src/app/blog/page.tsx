@@ -3,15 +3,13 @@ import { fetchBlog } from './_lib/getblog'
 import { BlogList } from './BlogList'
 import { Layout } from '@/components/Layout'
 
-export const dynamic = 'force-dynamic'
-
-export default async function Page() {
+export default async function BlogPage() {
 
 	const {posts, links} = await fetchBlog()
 
 	return (
 		<Layout>
-			<BlogList initialNodes={posts} initialLinks={links} />			
+			<BlogList initialNodes={posts} initialLinks={links} />
 		</Layout>
 	)
 }

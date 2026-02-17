@@ -15,14 +15,14 @@ export function BlogList({ initialNodes, initialLinks }) {
 
 	const handleLoadMore = async () => {
 		if (!nextLink || isLoading) return;
-	
+
 		setIsLoading(true);
-	
+
 		try {
 			// 1. Fetch raw JSON from the 'next' URL provided by Drupal
 			const response = await fetch(nextLink);
 			const json = await response.json();
-			
+
 			// 2. Deserialize the full response (to resolve includes/images)
 			const newData = dataFormatter.deserialize(json);
 			const newNodes = []
@@ -35,8 +35,8 @@ export function BlogList({ initialNodes, initialLinks }) {
 					body: fixUrls(node.body.processed),
 					tags: node.field_tags[0].name,
       			})
-    		)    
-			
+    		)
+
 			// 3. Update state: append new nodes and update the next link
 			setNodes((prev) => [...prev, ...newNodes]);
 			setNextLink(json.links?.next?.href || null);
@@ -48,21 +48,23 @@ export function BlogList({ initialNodes, initialLinks }) {
 	  }
 
   	return (
-    	<section className="bg-dark-glass place-items-center rounded max-w-4xl">
-      		<div className="p-4"> 
+    	<section className="place-items-center max-w-4xl">
+      		<div className="">
 				{nodes.map((post) => (
-					<div key={post.id} className="bg-dark-glass rounded p-2">
+					<div key={post.id} className="bg-dark-glass border border-glass-border rounded-glass p-4 m-4 text-white max-w-4xl">
 						<h3>{ post.title }</h3>
 						<p>Date: {(post.date)}</p>
-						<div dangerouslySetInnerHTML={{ __html: post.body }}
-						/>
-						<p>Tags: {post.tags}</p>					
-					</div>          
+						<div className="blogwrapper">
+    						<div dangerouslySetInnerHTML={{ __html: post.body }}
+						    />
+						</div>
+						<p>Tags: {post.tags}</p>
+					</div>
 				))}
       		</div>
 
      		 {nextLink && (
-        		<button 
+        		<button
           			onClick={handleLoadMore}
           			disabled={isLoading}
           			className="load-more-btn"
@@ -75,5 +77,5 @@ export function BlogList({ initialNodes, initialLinks }) {
 }
 
 /*
-<Link href={post.url}>Read on my website</Link> 
+<Link href={post.url}>Read on my website</Link>
 */
