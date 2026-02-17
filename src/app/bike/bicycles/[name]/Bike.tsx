@@ -2,6 +2,7 @@
  *
  */
 import Image from "next/image"
+import { sanitizeHTML } from "@/lib/utils"
 
 import styles from './bike.module.css';
 
@@ -14,7 +15,7 @@ export async function Bike({bike}) {
 				<p>{bike.make} &nbsp; {bike.model}</p>
 				<p>{bike.from} &nbsp; {bike.year}</p>
 				<div classname={styles.bikeHtml}>
-					<div dangerouslySetInnerHTML={{ __html: bike.html }} />
+					<div dangerouslySetInnerHTML={{ __html: sanitizeHTML(bike.html) }} />
 				</div>
 			</div>
 					

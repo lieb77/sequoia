@@ -1,11 +1,12 @@
 /* /components/Tour */
-import Image from "next/image";
+import Image from "next/image"
+import { sanitizeHTML } from "@/lib/utils"
 
 import styles from "./about.module.css"
 
 export function About({data}){
 
-	return(
+return(
 	<div className={styles.aboutPage}>
 		<h1>About Paul Lieberman</h1>
 		<div className={styles.hCard}>
@@ -17,7 +18,7 @@ export function About({data}){
 			<a className={styles.uEmail} href="mailto:lieb@paullieberman.net">eMail</a>
 			</p>
 			<div className={styles.pNote}>
-				<div dangerouslySetInnerHTML={{ __html: data.body.processed }} />
+				<div dangerouslySetInnerHTML={{ __html: sanitizeHTML(data.body.processed) }} />
 			</div>
 		</div>
 	</div>	

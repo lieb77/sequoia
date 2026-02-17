@@ -1,6 +1,6 @@
 /* component/RideLayout */
-
 import styles from '../_styles/ridelist.module.css';
+import { sanitizeHTML } from "@/lib/utils"
 
 export function RideList({ rides }: JSX.Element){
 	return(
@@ -17,7 +17,7 @@ export function RideList({ rides }: JSX.Element){
           <p>Bike: {ride.bike}</p>
           <p>Buddies: {ride.buddies}</p>
           <div className={styles.rideBody}>
-          	<div dangerouslySetInnerHTML={{ __html: ride.body}} />
+          	<div dangerouslySetInnerHTML={{ __html: sanitizeHTML(ride.body) }} />
           </div>
         </div>
       )}

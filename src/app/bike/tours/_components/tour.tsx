@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Slideshow } from '@/components/Slideshow'
 import type { TourDataShort, TourData } from "./types"
-
+import { sanitizeHTML } from "@/lib/utils"
 
 export function Tour({tour}: {tour: TourData} ){
 
@@ -15,7 +15,7 @@ export function Tour({tour}: {tour: TourData} ){
         <p>Number of days: {tour.days}</p>
         <p>Total miles: {tour.miles}</p>
         <p>Description: {tour.descr}</p>
-        <div dangerouslySetInnerHTML={{ __html: tour.body }} />
+        <div dangerouslySetInnerHTML={{ __html: sanitizeHTML(tour.body) }} />
          {tour.map &&
           <Image src={tour.map} alt="Tour map" width={500} height={400}/>
         }
@@ -30,7 +30,7 @@ export function Tour({tour}: {tour: TourData} ){
             <p>Date: {ride.date}</p>
             <p>Miles: {ride.miles}</p>
             <div>
-            	<div dangerouslySetInnerHTML={{ __html: ride.body}} />
+            	<div dangerouslySetInnerHTML={{ __html: sanitizeHTML(ride.body) }} />
             </div>
           </div>
         )}

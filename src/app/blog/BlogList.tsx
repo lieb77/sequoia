@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useState } from 'react';
 import { Jsona } from 'jsona';
-import { fixUrls, formatDate } from "@/lib/utils"
+import { fixUrls, formatDate, sanitizeHTML } from "@/lib/utils"
 
 const dataFormatter = new Jsona();
 
@@ -55,7 +55,7 @@ export function BlogList({ initialNodes, initialLinks }) {
 						<h3>{ post.title }</h3>
 						<p>Date: {(post.date)}</p>
 						<div className="blogwrapper">
-    						<div dangerouslySetInnerHTML={{ __html: post.body }}
+    						<div dangerouslySetInnerHTML={{ __html: sanitizeHTML(post.body) }}
 						    />
 						</div>
 						<p>Tags: {post.tags}</p>

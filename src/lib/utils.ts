@@ -1,7 +1,7 @@
 // src/lib/utils.ts
-import DOMPurify from 'dompurify'
 import { base } from '@/lib/constants'
 import { parse } from 'node-html-parser'
+import DOMPurify from 'isomorphic-dompurify'
 
 // Parse date into parts
 export function parseDate(dateString: string) : [] {
@@ -50,6 +50,7 @@ export function formatDate(dateString: string): string {
   };
   return date.toLocaleDateString(undefined, options);
 }
+
 
 // HTML Parser
 export function parseHtml(html: string) {
