@@ -15,7 +15,7 @@
     "@tailwindcss/typography": "github:tailwindcss/typography",
     "dompurify": "^3.3.1",
     "drupal-jsonapi-params": "^3.0.0",
-    "framer-motion": "^12.34.0",
+    "framer-motion": "^12.34.1",
     "isomorphic-dompurify": "3.0.0-rc.2",
     "jsona": "^1.12.1",
     "jsonapi-typescript": "^0.1.3",
