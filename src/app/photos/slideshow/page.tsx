@@ -3,11 +3,11 @@ import { Layout } from "@/components/Layout"
 import { Suspense } from 'react';
 // import { ReactSlideshow } from '@/components/ReactSlideshow'
 import { Slideshow } from '@/components/Slideshow'
-import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from './_lib/getphotos'
-import { PhotoData, Photos } from './_lib/Photos'
-import { Event, Events } from './_lib/Events'
-import { CatSelect } from './_components/CatSelect'
-import { EventSelect } from './_components/EventSelect'
+import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from '../_lib/getphotos'
+import { PhotoData, Photos } from '../_lib/Photos'
+import { Event, Events } from '../_lib/Events'
+import { CatSelect } from '../_components/CatSelect'
+import { EventSelect } from '../_components/EventSelect'
 
 
 export default async function photosPage(props: {

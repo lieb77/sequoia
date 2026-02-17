@@ -44,7 +44,7 @@ export function TourIndex({tours} : {tours: TourDataShort[] }){
     <div className="grid grid-cols-4 gap-2">
       {tours.map(tour =>
         <div key={tour.id} className="warpme">
-          <Link href={`/tour?id=${tour.id}`}>
+          <Link href={`/bike/tours/${tour.id}`}>
             <p>{tour.title}</p>
             <p>{tour.date}</p>
             <p>{tour.descr}</p>

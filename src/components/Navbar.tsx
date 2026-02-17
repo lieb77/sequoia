@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-export function Navbar()  {
+export default function Navbar()  {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
