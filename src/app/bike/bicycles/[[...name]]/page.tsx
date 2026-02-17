@@ -4,13 +4,14 @@ import { transformBike } from "../_lib/transformBike"
 import { Bike } from "./Bike.tsx"
 
 	export default async function BikePage({ params }: { params: Promise<{ name: string }> }) {
-	const { name } = await params;
+	const { name } = await params
+    const bikeName = name || "Ravn"
 	
 	// Decodes "Soma%20Saga" back to "Soma Saga"
-	const decodedName = decodeURIComponent(name); 
+	const decodedName = decodeURIComponent(bikeName) 
 		
-	const bike = await getBikeByName(decodedName);
-	if (!bike) return <div>Bike not found</div>;
+	const bike = await getBikeByName(decodedName)
+	if (!bike) return <div>Bike not found</div>
 	
 	// map the fields to simple array keys
 	const bikeData =transformBike(bike)  
