@@ -1,7 +1,7 @@
 // /lib/getblog.tsx
 import { client } from "@/lib/api/drupalClient"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
-import { fixUrls, formatDate } from "@/lib/utils"
+import { fixUrls, formatDate, date2MonthYear } from "@/lib/utils"
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 
 export async function fetchBlog() {
@@ -28,6 +28,7 @@ export async function fetchBlog() {
 			id: post.id,
 			title: post.title,
 			date: formatDate(post.created),
+			dmy: date2MonthYear(post.created),
 			url: "https://paulleiberman.org/blog",
 			body: fixUrls(post.body.processed),
 			tags: post.field_tags[0].name,

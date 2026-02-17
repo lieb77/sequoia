@@ -75,3 +75,17 @@ export function parseHtml(html: string) {
     rawText
   };
 }
+
+export function date2MonthYear(dateString: string): string {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+                month: 'long',
+                year: 'numeric',
+        }
+        return date.toLocaleDateString(undefined, options)
+}
+
+export const currentMonthYear = new Date().toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
+        })
