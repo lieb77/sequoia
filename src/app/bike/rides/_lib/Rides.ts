@@ -3,7 +3,7 @@
  *
  * Exports a Rides class
  *
- * The constructor parses the data as it comes from JSON:API
+ * Parses the data as it comes from JSON:API
  * and stores it as an array of rides.
  * Also does some tallying and calculations.
  *
@@ -29,19 +29,22 @@ export class Rides {
 	}
 
 	// Return all rides
-	public async  getRides() : Ride[] {
 
-		const data = await this.fetchRidesByYear()
-		this.parseData(data)
-		
-		if (this.year == currentYear ){
-			this.sortDesc
+	public async getRides(): Promise<Ride[]> {
+    	const data = await this.fetchRidesByYear()
+    
+    	// Clear the array before parsing to prevent duplication if called twice
+    	this.ridesArray = [] 
+    	this.parseData(data)
+    
+    	// Only reverse the order if it's the current year
+    	if (String(this.year) === String(currentYear)) {
+  	 		this.sortDesc();
 		}
-		else {
-			this.sortAsc}
-
-		return this.ridesArray
+    	    	
+    	return this.ridesArray
 	}
+
 	
 	// Get rides for tour
 	public async getRidesForTour(tourId){
@@ -64,13 +67,13 @@ export class Rides {
 			"July", "August", "September", "October", "November", "December"
 		];
 
-		// 1. Initialize the 12-month structure
+		// Initialize the 12-month structure
 		const initialAcc = monthNames.reduce((obj, month) => {
 			obj[month] = { month, total: 0, bikes: {} };
 			return obj;
 		}, {});
 
-		// 2. Aggregate the data
+		//  Aggregate the data
 		const monthlyData = rides.reduce((acc, ride) => {
 			const date = new Date(ride.date);
 			const month = date.toLocaleString('default', { month: 'long' });
@@ -84,7 +87,7 @@ export class Rides {
 			return acc;
 		}, initialAcc);
 
-		// 3. Calculate Yearly Stats
+		//  Calculate Yearly Stats
 		const totalMiles = rides.reduce((sum, r) => sum + (parseInt(r.miles) || 0), 0);
 
 		const stats = {
@@ -98,8 +101,33 @@ export class Rides {
 			tableRows: Object.values(monthlyData), // Returns the Jan-Dec array
 			stats,
 			uniqueBikes: [...new Set(rides.map(r => r.bike).filter(Boolean))]
-		};
+		}
 	}
+
+	/**
+	 * Returns the sum of miles for all rides currently in the array.
+	 * Usage: const total = ridesInstance.totalMiles;
+	 */
+	get totalMiles(): number {
+		return this.ridesArray.reduce((sum, ride) => sum + (Number(ride.miles) || 0), 0);
+	}
+	
+	/**
+	 * Returns the total count of rides.
+	 * Usage: const count = ridesInstance.count;
+	 */
+	get count(): number {
+		return this.ridesArray.length;
+	}
+	
+	/**
+	 * Returns the average miles per ride, rounded.
+	 */
+	get averageMiles(): number {
+		if (this.count === 0) return 0;
+		return Math.round(this.totalMiles / this.count);
+	}
+
 
 	/* Privare functions -------------------------------- */
 	
@@ -118,23 +146,15 @@ export class Rides {
 		})
 	}
 
-	private sortAsc() : void {
-		this.ridesArray.sort((a, b) => {
-		  return new Date(a.date).getTime() - new Date(b.date).getTime();
-		});
-	}
-
 	private sortDesc() : void {
-		this.ridesArray.sort((a, b) => {
-		  return new Date(b.date).getTime() - new Date(a.date).getTime();
-		});
+    	this.ridesArray.sort((a, b) => b.date.localeCompare(a.date));
 	}
-
-
+	
 	private async fetchRidesByYear(): Promise<Ride[]> {
 		const params = new DrupalJsonApiParams()
 			.addFields("node--ride", ['title','body','field_miles', 'field_ridedate', 'field_buddies', 'field_bike'])
 			.addFilter("field_ridedate",this.year, 'STARTS_WITH' )
+			.addSort("field_ridedate", "ASC")
 			.addInclude(['field_bike'])
 
 		let allData = [];
