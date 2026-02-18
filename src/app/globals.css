@@ -42,7 +42,7 @@ body {
   height: 100vh;
 }
 
-main {
+notmain {
   padding: 2em;
   display: grid;
   place-items: center;

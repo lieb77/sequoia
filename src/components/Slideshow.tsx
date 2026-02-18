@@ -57,7 +57,7 @@ export const Slideshow = ({
                             src={images[currentIndex].url}
                             alt={`Slide ${currentIndex + 1}`}
                             fill
-                            sizes="(max-height: 80vh) 100vw, 80vw"
+                            sizes="(max-height: 90vh) 100vw, 90vw"
                             className="object-contain"
                             priority
                         />

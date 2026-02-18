@@ -9,7 +9,7 @@ export default function Bikenav() {
   const pathname = usePathname();
 
   return (
-    <nav className="h-16 bg-slate-900 text-white z-50 flex items-center px-6 shadow-md rounded-lg">     
+    <nav className="h-12 bg-slate-900 text-white z-50 flex items-center px-6 shadow-md rounded-lg">     
 
       <ul className="flex gap-6 overflow-x-auto no-scrollbar py-2">
         {bikeNames.map((name) => {
@@ -23,7 +23,7 @@ export default function Bikenav() {
                 href={href} 
                 className={`text-lg font-medium transition-colors ${
                   isActive 
-                    ? "text-blue-400 border-b-2 border-blue-400" 
+                    ? "text-slate-200 border-b-2 border-slate-200" 
                     : "text-slate-300 hover:text-white"
                 }`}
               >

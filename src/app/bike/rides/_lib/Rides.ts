@@ -51,8 +51,7 @@ export class Rides {
 
 		const data = await this.fetchRidesByTour(tourId)
 		this.parseData(data)
-		this.sortAsc()
-		
+	
 		return this.ridesArray	
 	}
 	

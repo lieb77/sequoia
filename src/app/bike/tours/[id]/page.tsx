@@ -1,8 +1,5 @@
+// src/app/bike/tours/[id]/page.tsx
 
-/* /tours/page.tsx
- *
- */
-import { Layout } from '@/components/Layout'
 import { Rides } from '../rides/ride'
 import { Photos } from '@/features/photos'
 import { Tour } from '../_components/tour'
@@ -16,11 +13,9 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
 	  const tour      = await tourClass.getTour()
 
 	  return (
-		<Layout>
-		  <main className="flex flex-col p-4">
+		<div>
 			<Tour tour={tour} />
-		   </main>
-		</Layout>
+		</div>
 	  )
 }
 

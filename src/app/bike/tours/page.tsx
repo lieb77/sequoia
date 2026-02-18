@@ -10,8 +10,8 @@ export default async function Page() {
 	  const tourIndex  = await tourClass.getTourIndex()
 
   	return (
-      		<main className="flex flex-col p-4">
+      		<div className="flex flex-col">
       			<TourIndex tours={tourIndex} />
-      		</main>
+      		</div>
   	)
 }
