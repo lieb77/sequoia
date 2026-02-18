@@ -3,7 +3,7 @@ import Bikenav from '../_components/Bikenav';
 
 export default function BikesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative mt-4 min-h-screen flex flex-col">
       <Bikenav />      
       
       <div className="flex-1 px-6  max-w-5xl mx-auto w-full">
