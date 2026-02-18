@@ -39,7 +39,7 @@ export default async function PhotosPage(props: {
 
 
 	return (
-		<div className="w-full flex flex-col items-center"> 
+		<div className="w-full flex flex-col items-center mt-4"> 
 			{/* The Filter Bar: Centered and only as wide as the selects */}
 			<div className="flex flex-wrap items-baseline justify-center gap-4 p-2 mb-4 bg-gray-100 rounded-lg w-fit mx-auto border border-gray-200">
 				<CatSelect options={CATEGORIES} current={category} />
@@ -58,14 +58,3 @@ export default async function PhotosPage(props: {
 		</div>
 	)
 }
-
-/*
-    return (
-		<Suspense>
-			<CatSelect options={CATEGORIES} current={category} />
-			{category === 'Family' && <EventSelect options={events} current={event} />}
-			<Slideshow images={photos} interval={6000} />
-		</Suspense>
-    )
-}
-*/
