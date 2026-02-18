@@ -60,7 +60,11 @@ export function RideNav() {
   }
 
   return (
+  
+	<div className={styles.rideNav}>
+	<h2 className={styles.ridesYear}>Rides {year}</h2>
     <div className={styles.navButtons}>
+    
       <button onClick={setPrev} className={styles.navButton} disabled={year <= parseInt(minYear, 10)}>
         <AiOutlineArrowLeft size={24} />
       </button>
@@ -82,7 +86,7 @@ export function RideNav() {
       </form>
 
       <div className={styles.ridenavView}>
-        View as:<br />
+        <span className={styles.ridenavSpan}>View as: </span>
         <input 
           onChange={() => setView('rides')}
           type="radio"
@@ -106,5 +110,6 @@ export function RideNav() {
         <label className={styles.ridenavLabel} htmlFor="stats">Stats</label>
       </div>
     </div>
-  );
+    </div>
+  )
 }

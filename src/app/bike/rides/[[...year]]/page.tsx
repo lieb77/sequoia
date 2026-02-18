@@ -1,5 +1,4 @@
 // /rides/page.tsx
-import { Layout } from '@/components/Layout'
 import { currentYear } from '@/lib/constants'
 import { RideView, RideNav } from '../_components'
 import { Rides } from '../_lib/Rides'
@@ -19,10 +18,9 @@ export default async function RidesPage({ params, searchParams }: Props) {
 	const stats      = ridesClass.getYearlyStats()
 	
 	return (
-		<Layout>
-			<h1 className="text-gray-800!">Rides {selectedYear}</h1>
+		<div className="place-items-center">
 			<RideNav />
-				<RideView view={selectedView} stats={stats} rides={myRides}/>
-		</Layout>
+			<RideView view={selectedView} stats={stats} rides={myRides}/>
+		</div>
 	)
 }

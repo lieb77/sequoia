@@ -1,36 +1,65 @@
-
 @reference "../../../../app/globals.css";
 
+/* Main Container: Handles the Title and the Button Row */
+.rideNav {
+  @apply flex flex-col lg:flex-row items-center justify-between bg-gray-200 border border-gray-600 px-6 py-3 mb-4 rounded-lg shadow-sm min-w-4xl ;
+  @apply sticky z-30 shadow-md;
 
-.navButtons {
-	@apply bg-gray-200 border border-gray-600 px-2 mb-2 rounded-lg; 
+  /* Position it exactly 10px below the 56px (h-14) main nav */
+  top: calc(56px + 10px);
+}
+
+.ridesYear {
+  @apply text-gray-800 text-2xl font-bold mb-2 lg:mb-0;
 }
 
 .navButton {
-	@apply bg-gray-500 hover:bg-gray-800 text-white font-bold px-4 rounded transition-colors duration-300;
-}
-
-.navText {
-	@apply text-gray-800 p-2;
-}
-
-.ridenavForm {
-	@apply inline-block border-gray-800 p-2 m-2 text-black;
+  /* Use inline-flex and center to keep the icon exactly in the middle of the button's height */
+  @apply inline-flex items-center justify-center bg-gray-500 hover:bg-gray-800 disabled:bg-gray-300 text-white font-bold px-4 py-2 rounded transition-colors duration-300;
+  
+  /* Ensure a consistent height so it matches the input field exactly */
+  height: 38px; /* Adjust this to match the computed height of your ridenavYear */
 }
 
 .ridenavYear {
-	@apply bg-white border border-gray-800 rounded p-2 mx-2;
+  /* Force a matching height to ensure the 'bottoms' align perfectly */
+  @apply bg-white border border-gray-400 rounded px-3 py-2 text-sm text-black focus:outline-none;
+  height: 38px;
 }
 
+.navButtons {
+  /* Switch to items-end if you want the physical bottom borders to snap together */
+  /* Or stay with items-baseline if you want the text to line up */
+  @apply flex flex-wrap items-end gap-x-2 gap-y-4; 
+}
+
+.navText {
+  /* Add a small bottom padding or margin if the text looks too low compared to the buttons */
+  @apply text-gray-800 font-bold px-2 pb-2; 
+}
+
+
+
+/* Form container needs to be a flex child that behaves like an item */
+.ridenavForm {
+  @apply flex items-baseline gap-2;
+}
+
+
+/* View Selection Group */
 .ridenavView {
-	@apply text-gray-800 inline-block text-center;
+  @apply flex items-baseline gap-2 text-gray-800 ml-4 border-l border-gray-400 pl-4;
 }
 
 .ridenavRadio {
-	@apply text-gray-800 rounded-full border border-gray-300 checked:border-gray-400 transition-all;
+  /* Radio buttons can be tricky with baseline; sometimes self-center is better for them */
+  @apply self-center w-4 h-4 text-gray-800 border-gray-300 ;
+  /* This changes the inner fill color of the radio button */
+  @apply accent-gray-800 h-4 w-4 cursor-pointer transition-all;
+  /* Optional: Ensure the focus state matches your theme instead of the default blue */
+  @apply focus:ring-gray-400 focus:ring-offset-2;
 }
 
 .ridenavLabel {
-	@apply mr-2 p-1 text-gray-800;
+  @apply text-sm font-medium  p-1 text-gray-800 cursor-pointer hover:text-black transition-colors;
 }
-

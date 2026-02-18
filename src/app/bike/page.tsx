@@ -1,5 +1,4 @@
 // src/app/bike/page.tsx
-import { Layout } from '@/components/Layout'
 import { getBikePage } from './_lib/getbikepage'
 import { parseHtml } from '@/lib/utils'
 import Image from 'next/image'
@@ -9,7 +8,6 @@ export default async function BikePage() {
     const content = parseHtml(html)
 
     return (
-        <Layout>
             <div className="items-center justify-center min-h-screen p-4 ">
                 <section className="w-full">
                     <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -61,6 +59,5 @@ export default async function BikePage() {
                            
                 </div>
             </div>
-        </Layout>
     )
 }

@@ -1,5 +1,4 @@
 // /pictures/page.tsx
-import { Layout } from '@/components/Layout'
 import { Suspense } from 'react'
 import { Slideshow } from '@/components/Slideshow'
 import { fetchPhotosByTag, fetchFamilyEvents, fetchPhotosByEvent } from './_lib/getphotos'
@@ -51,13 +50,11 @@ export default async function photosPage(props: PhotosPageProps) {
     }
 
     return (
-        <Layout>
-            <Suspense>
-                <CatSelect options={categories} current={category} />
-                {category === 'Family' && <EventSelect options={events} current={event} />}
-                <Slideshow images={photos} interval={6000} />
-            </Suspense>
-        </Layout>
+		<Suspense>
+			<CatSelect options={categories} current={category} />
+			{category === 'Family' && <EventSelect options={events} current={event} />}
+			<Slideshow images={photos} interval={6000} />
+		</Suspense>
     )
 }
 

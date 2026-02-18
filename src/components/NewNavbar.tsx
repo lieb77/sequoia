@@ -62,7 +62,7 @@ export default function Navbar() {
     return (
         <nav className="fixed top-0 left-0 w-full z-[9999] bg-gray-800 text-white shadow-lg">
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
+                <div className="flex justify-between items-center h-14">
                     {/* Mobile Menu Button */}
                     <div className="flex md:hidden">
                         <button onClick={() => setIsOpen(!isOpen)} className="p-2">

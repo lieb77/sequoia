@@ -1,5 +1,4 @@
 // gallery/page.tsx
-import { Layout } from "@/components/Layout"
 import { fetchPhotos } from './getphotos'
 import { PhotoCard } from './photocard'
 import { base } from '@/lib/constants'
@@ -9,7 +8,6 @@ export default async function Page() {
 	const photos = await fetchPhotos()
 
 	return (
-	<Layout>
 	 <div className="p-8 min-w-full">
 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 			{photos.map((photo) => (
@@ -28,6 +26,5 @@ export default async function Page() {
 			))}
 		</div>
 	  </div>
-	  </Layout>
 	)
 }
