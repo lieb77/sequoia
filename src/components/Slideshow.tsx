@@ -1,4 +1,3 @@
-// /components/Slideshow
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -16,102 +15,101 @@ export const Slideshow = ({
 }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
+    const [direction, setDirection] = useState(0) // 1 for right, -1 for left
 
+    // Handle automated transitions
     useEffect(() => {
         if (isPaused) return
-
         const timer = setInterval(() => {
-            handleNext()
+            paginate(1)
         }, interval)
-
         return () => clearInterval(timer)
-    }, [images, interval, isPaused, currentIndex])
+    }, [isPaused, currentIndex, interval])
 
-    const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % images.length)
+    const paginate = (newDirection: number) => {
+        setDirection(newDirection)
+        setCurrentIndex((prev) => (prev + newDirection + images.length) % images.length)
     }
 
-    const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+    // Framer Motion Variants for the slide animation
+    const variants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? '100%' : '-100%',
+            opacity: 0
+        }),
+        center: {
+            x: 0,
+            opacity: 1
+        },
+        exit: (direction: number) => ({
+            x: direction < 0 ? '100%' : '-100%',
+            opacity: 0
+        })
     }
 
     if (!images || images.length === 0) return null
 
     return (
         <div
-            className="relative w-full max-w-5xl mx-auto group h-[70vh] rounded-xl overflow-hidden"
+            className="relative w-full max-w-5xl mx-auto group h-[70vh] rounded-xl overflow-hidden bg-transparent"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
-            <div className="relative w-full h-full">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentIndex} // Crucial: tells Framer this is a "new" element
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="absolute inset-0"
-                    >
-                        <Image
-                            src={images[currentIndex].url}
-                            alt={`Slide ${currentIndex + 1}`}
-                            fill
-                            sizes="(max-height: 90vh) 100vw, 90vw"
-                            className="object-contain"
-                            priority
-                        />
-                    </motion.div>
-                </AnimatePresence>
-            </div>
+            <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                    key={currentIndex}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                        x: { type: "spring", stiffness: 300, damping: 30 },
+                        opacity: { duration: 0.2 }
+                    }}
+                    // --- TOUCH / DRAG LOGIC ---
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={1}
+                    onDragEnd={(e, { offset, velocity }) => {
+                        const swipe = offset.x
+                        const swipeThreshold = 50 // px to trigger change
+                        if (swipe < -swipeThreshold) {
+                            paginate(1)
+                        } else if (swipe > swipeThreshold) {
+                            paginate(-1)
+                        }
+                    }}
+                    className="absolute inset-0 cursor-grab active:cursor-grabbing touch-pan-y"
+                >
+                    <Image
+                        src={images[currentIndex].url}
+                        alt={`Slide ${currentIndex + 1}`}
+                        fill
+                        sizes="(max-height: 70vh) 100vw, 90vw"
+                        className="object-contain pointer-events-none rounded-xl" // prevent img drag
+                        priority
+                    />
+                    
+                </motion.div>
+            </AnimatePresence>
 
-            {/* Navigation Arrows - Only visible on hover */}
+            {/* Navigation Arrows */}
             <button
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => paginate(-1)}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-white/40 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
             >
-                <ChevronLeft size={32} />
+                <ChevronLeft size={32} className="text-white" />
             </button>
 
             <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => paginate(1)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/30 hover:bg-white/40 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
             >
-                <ChevronRight size={32} />
+                <ChevronRight size={32} className="text-white" />
             </button>
+            
+           
         </div>
     )
 }
-/*	
- 
-      <Image
-        key={images[currentIndex].id}
-        src={images[currentIndex].url}
-        alt={`Slide ${currentIndex + 1}`}
-		sizes="(max-height: 80vh) 100vw, 80vw"
-        fill // Use fill for better responsive control in a container
-        className="object-contain transition-opacity duration-700 ease-in-out"
-        priority // Loads the first images faster
-      />
-
-
-
-
-
-
-
-	return (
-		<div className="slideshow-container">
-		  <Image
-			src={images[currentIndex].url}
-			alt={`Slide ${currentIndex + 1}`}
-			key={images[currentIndex].id}
-			width={1024}
-			height={768}
-			sizes="(max-height: 80vh) 100vw, 80vw"
-			style={{ objectFit: 'contain' }}
-		  />
-		</div>
-	)
-}
-*/
