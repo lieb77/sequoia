@@ -1,6 +1,7 @@
 // /rides/page.tsx
 import { currentYear } from '@/lib/constants'
-import { RideView, RideNav } from '../_components'
+import { RideView } from '../_components/RideView'
+import { RideNav } from '../_components/RideNav'
 import { Rides } from '../_lib/Rides'
 
 

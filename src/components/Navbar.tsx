@@ -1,42 +1,129 @@
-// components/Navbar.tsx
-"use client"
+'use client'
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Menu, X } from 'lucide-react' // Optional: install lucide-react for icons
 
-export default function Navbar()  {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const primaryLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Bike', href: '/bike' },
+    { name: 'Photos', href: '/photos' }
+]
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  return (
-    <nav className="bg-gray-800 text-white p-4 sticky top-0">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-lg font-bold">Lieb&apos;s Log</Link>
-        <div className="lg:hidden">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path fillRule="evenodd" clipRule="evenodd" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
-              ) : (
-                <path fillRule="evenodd" clipRule="evenodd" d="M3 6H21V8H3V6ZM3 12H21V14H3V12ZM3 18H21V20H3V18Z" />
-              )}
-            </svg>
-          </button>
-        </div>
-        <div className={`lg:flex ${isMenuOpen ? 'block' : 'hidden'} lg:block space-x-4`}>
-          <Link href="/about" className="block lg:inline-block">About</Link>
-          <Link href="/blog"  className="block lg:inline-block">Blog</Link>
-          <Link href="/bike/bicycles" className="block lg:inline-block">Bicycles</Link>
-          <Link href="/bike/rides" className="block lg:inline-block">Rides</Link>
-          <Link href="/bike/tours" className="block lg:inline-block">Tours</Link>
-          <Link href="/photos/gallery"  className="block lg:inline-block">Photo Gallery</Link>
-          <Link href="/photos"  className="block lg:inline-block">Photo Slideshow</Link>
-        </div>
-      </div>
-    </nav>
-  )
+const secondaryMenus: Record<string, { name: string; href: string }[]> = {
+    '/bike': [
+        { name: 'Bicycles', href: '/bike/bicycles' },
+        { name: 'Rides', href: '/bike/rides' },
+        { name: 'Tours', href: '/bike/tours' }
+    ],
+    '/photos': [
+        { name: 'Gallery', href: '/photos/gallery' },
+        { name: 'Slideshow', href: '/photos/slideshow' }
+    ]
 }
 
+export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false)
+    const pathname = usePathname()
+
+    // 1. Find the active primary link
+    // We check for an exact match OR if the current path starts with the href + /
+    const activePrimary = primaryLinks.find((link) => {
+        if (link.href === '/') return pathname === '/'
+        return pathname === link.href || pathname.startsWith(`${link.href}/`)
+    })
+
+    // 2. Get the specific secondary menu based on that active primary href
+    // Using activePrimary?.href ensures we use the exact key: '/bike' or '/photos'
+    const secondaryLinks = activePrimary ? secondaryMenus[activePrimary.href] : null
+
+    const NavLink = ({ href, children }: any) => {
+        // Use exact match for the underline, or check if it's a deep child
+        const isActive = pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
+
+        return (
+            <Link
+                href={href}
+                className={`px-3 text-lg font-medium transition-all relative ${
+                    isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                }`}
+            >
+                {children}
+                {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white rounded-full" />
+                )}
+            </Link>
+        )
+    }
+
+    return (
+        <nav className="fixed top-0 left-0 w-full z-[9999] bg-gray-800 text-white shadow-lg">
+            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-14">
+                    {/* Mobile Menu Button */}
+                    <div className="flex md:hidden">
+                        <button onClick={() => setIsOpen(!isOpen)} className="p-2">
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+
+                    {/* Primary Menu (Left) */}
+                    <div className="hidden md:flex space-x-4">
+                        {primaryLinks.map((link) => (
+                            <NavLink key={link.href} href={link.href}>
+                                {link.name}
+                            </NavLink>
+                        ))}
+                    </div>
+
+                    {/* Secondary Menu (Right) */}
+                    <div className="hidden md:flex space-x-4">
+                        {secondaryLinks?.map((link) => (
+                            <NavLink key={link.href} href={link.href} isSecondary>
+                                {link.name}
+                            </NavLink>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu (Collapsed) */}
+            {isOpen && (
+                <div className="md:hidden bg-gray-900 px-4 pt-2 pb-4 space-y-1">
+                    <p className="text-xs font-bold text-gray-500 uppercase px-3 py-2">Main Menu</p>
+                    {primaryLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="block px-3 py-2"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    {secondaryLinks && (
+                        <>
+                            <div className="border-t border-gray-700 my-2" />
+                            <p className="text-xs font-bold text-gray-500 uppercase px-3 py-2">
+                                Sub Menu
+                            </p>
+                            {secondaryLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="block px-3 py-2"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </>
+                    )}
+                </div>
+            )}
+        </nav>
+    )
+}

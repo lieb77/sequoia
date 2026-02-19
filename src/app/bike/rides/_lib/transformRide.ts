@@ -1,5 +1,5 @@
 // src/lib/data/transformRide.ts
-import { JsonRide, Ride } from '@/lib/types/Ride'
+import { JsonRide, Ride } from './types'
 
 export function transformRide(ride: JsonRide): Ride {
     return {
