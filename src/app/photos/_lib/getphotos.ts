@@ -49,7 +49,11 @@ export async function fetchPhotosByEvent(event: string)  {
 
 
 export async function fetchFamilyEvents() {
-  	const data = await client.getResourceCollection<DrupalTaxonomyTerm[]>("taxonomy_term--event")
+	const params = new DrupalJsonApiParams()
+	.addFields('taxonomy_term--event', ['id', 'name'])
+	.addSort('name')
+
+  	const data = await client.getResourceCollection<DrupalTaxonomyTerm[]>("taxonomy_term--event",{params: params.getQueryObject() })
   	return(data)
 
 }
