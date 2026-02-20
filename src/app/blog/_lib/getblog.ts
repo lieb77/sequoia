@@ -7,7 +7,7 @@ import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 export async function fetchBlog(tag: string) {
 
     const params = new DrupalJsonApiParams()
-        .addFields("node--blog", ['title', 'body', 'field_tags','created'])
+        .addFields("node--blog", ['title', 'body', 'field_tags','created','path'])
         .addSort("created", "DESC")
         .addInclude('field_tags')
         .addPageLimit('5')
@@ -26,6 +26,50 @@ export async function fetchBlog(tag: string) {
 
  	// Extract and process the data
  	const posts  = []
+    nodes.forEach((post) => 
+      	posts.push({
+			id: post.id,
+			title: post.title,
+			date: formatDate(post.created),
+			dmy: date2MonthYear(post.created),
+			url: "https://paulleiberman.org/blog",
+			body: fixUrls(post.body.processed),
+			tags: post.field_tags[0].name,
+			path: post.path.alias
+      })
+    )
+
+ 	// return the data
+ 	return({posts, links})
+}
+
+export async function fetchBlogByYear(year: string) {
+
+	// Create unix timestamps for the created query
+	const startOfYear = Math.floor(new Date(`${year}-01-01T00:00:00Z`).getTime() / 1000)
+	const endOfYear = Math.floor(new Date(`${year}-12-31T23:59:59Z`).getTime() / 1000)
+	
+	
+    const params = new DrupalJsonApiParams()
+        .addFields("node--blog", ['title', 'body', 'field_tags','created', 'path'])
+        .addSort("created", "DESC")
+        .addInclude('field_tags')
+        .addPageLimit('5')
+		.addFilter("created", startOfYear.toString(), ">=")
+		.addFilter("created", endOfYear.toString(), "<=")
+		.getQueryObject()
+
+     const response = await client.getResourceCollection<DrupalNode>("node--blog", {
+     	params: params,
+  		deserialize: false,
+	})
+
+	// Get the data
+	const links = response.links
+ 	const nodes = client.deserialize(response)
+
+ 	// Extract and process the data
+ 	const posts  = []
     nodes.forEach((post) =>
       	posts.push({
 			id: post.id,
@@ -35,6 +79,45 @@ export async function fetchBlog(tag: string) {
 			url: "https://paulleiberman.org/blog",
 			body: fixUrls(post.body.processed),
 			tags: post.field_tags[0].name,
+			path: post.path.alias
+      })
+    )
+
+ 	// return the data
+ 	return({posts, links})
+}
+
+export async function fetchBlogByPath(path: string) {
+
+    const params = new DrupalJsonApiParams()
+        .addFields("node--blog", ['title', 'body', 'field_tags','created', 'path'])
+        .addSort("created", "DESC")
+        .addInclude('field_tags')
+        .addPageLimit('5')
+//		.addFilter("path.alias", '/blog/' +  path )
+		.getQueryObject()
+
+     const response = await client.getResourceCollection<DrupalNode>("node--blog", {
+     	params: params,
+  		deserialize: false,
+	})
+
+	// Get the data
+	const links = response.links
+ 	const nodes = client.deserialize(response)
+
+ 	// Extract and process the data
+ 	const posts  = []
+    nodes.forEach((post) =>
+      	posts.push({
+			id: post.id,
+			title: post.title,
+			date: formatDate(post.created),
+			dmy: date2MonthYear(post.created),
+			url: "https://paulleiberman.org/blog",
+			body: fixUrls(post.body.processed),
+			tags: post.field_tags[0].name,
+			path: post.path.alias
       })
     )
 
