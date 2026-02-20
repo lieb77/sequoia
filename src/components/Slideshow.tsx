@@ -8,7 +8,7 @@ import type { PhotoData } from '@/app/photos/_lib/types'
 
 export const Slideshow = ({
     images,
-    interval = 4000
+    interval = 2000
 }: {
     images: PhotoData[]
     interval?: number
