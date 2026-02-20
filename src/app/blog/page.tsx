@@ -4,6 +4,7 @@ import { BlogList } from './_components/BlogList'
 import { BlogSelect } from './_components/BlogSelect'
 import { Suspense } from 'react'
 
+
 export default async function BlogPage(props: {
     searchParams: Promise<{ category?: string }>
 }) {

@@ -1,6 +1,6 @@
-/* component/RideLayout */
-import styles from '../_styles/ridelist.module.css';
+// /src/app/bike/rides/_components/RideList.tsx
 import { sanitizeHTML } from "@/lib/utils"
+import styles from '../_styles/ridelist.module.css'
 
 export function RideList({ rides }: JSX.Element){
 	return(

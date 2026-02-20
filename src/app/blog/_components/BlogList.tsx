@@ -3,10 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Jsona } from 'jsona'
 import { fixUrls, formatDate, sanitizeHTML, currentMonthYear } from '@/lib/utils'
+import styles from '../_styles/bloglist.module.css'
+
 
 const dataFormatter = new Jsona()
 
-export function BlogList({ initialNodes, nextUrl }) {
+export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
     const [nodes, setNodes] = useState(initialNodes)
     const [nextLink, setNextLink] = useState(nextUrl)
     const [isLoading, setIsLoading] = useState(false)
@@ -86,30 +88,30 @@ export function BlogList({ initialNodes, nextUrl }) {
     }, [handleLoadMore, nextLink, isLoading])
 
     return (
-        <section className="flex flex-col items-center w-full">
-            <div className="w-full max-w-4xl">
+        <section className={styles.blogcontainer}>
+            <div className={styles.bloginner}>
                 {nodes.map((post, index) => (
                     <div key={post.id}>
                         {/* Month/Year Divider Logic */}
                         {(index === 0 || post.dmy !== nodes[index - 1].dmy) &&
                             post.dmy &&
                             post.dmy !== currentMonthYear && (
-                                <div className="flex items-center my-8 text-slate-200 text-sm font-semibold uppercase tracking-wider">
-                                    <span className="whitespace-nowrap pr-4">{post.dmy}</span>
-                                    <div className="flex-grow border-t border-gray-700"></div>
+                                <div className={styles.blogdmyouter}>
+                                    <span className={styles.blogdmy}>{post.dmy}</span>
+                                    <div className={styles.blogdmyborder}></div>
                                 </div>
                             )}
 
-                        <div className="bg-dark-glass border border-glass-border rounded-lg p-6 m-4 text-white shadow-xl">
-                            <h3 className="text-2xl font-bold mb-2">{post.title}</h3>
-                            <p className="text-gray-400 text-sm mb-4">Posted on: {post.date}</p>
-                            <div className="blogwrapper prose prose-invert max-w-none mb-4">
+                        <div className={styles.blogpost}>
+                            <h3 className={styles.blogposttitle}>{post.title}</h3>
+                            <p className={styles.blogposted}>Posted on: {post.date}</p>
+                            <div className={styles.blogwrapper}>
                                 <div
                                     dangerouslySetInnerHTML={{ __html: sanitizeHTML(post.body) }}
                                 />
                             </div>
-                            <div className="pt-4 border-t border-gray-700">
-                                <span className="text-xs bg-slate-900/50 px-2 py-1 rounded text-slate-200">
+                            <div className={styles.blogtagsouter}>
+                                <span className={styles.blogtags}>
                                     Tag: {post.tags}
                                 </span>
                             </div>
@@ -119,16 +121,16 @@ export function BlogList({ initialNodes, nextUrl }) {
             </div>
 
             {/* Intersection Target / Loading Spinner */}
-            <div ref={observerTarget} className="h-32 flex items-center justify-center w-full">
+            <div ref={observerTarget} className={styles.observeroute}>
                 {isLoading && (
-                    <div className="flex space-x-2">
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-.3s]"></div>
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-.5s]"></div>
+                    <div className={styles.observerinner}>
+                        <div className={styles.bouncer}></div>
+                        <div className={styles.bouncer}></div>
+                        <div className={styles.bouncer}></div>
                     </div>
                 )}
                 {!nextLink && nodes.length > 0 && (
-                    <p className="text-gray-500 italic text-sm">
+                    <p className={styles.theend}>
                         You've reached the end of the road.
                     </p>
                 )}

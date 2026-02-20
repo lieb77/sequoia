@@ -1,0 +1,94 @@
+@reference "../../globals.css";
+
+.blogcontainer {
+	@apply flex flex-col items-center w-full;
+}
+
+.blogposted {
+    @apply text-gray-200 text-sm mb-4
+}
+
+.bloginner {
+	@apply w-full max-w-4xl;
+}
+
+.blogwrapper {
+    @apply  max-w-none mb-4;
+}
+
+.blogwrapper p {
+    @apply mb-3;
+}
+
+.blogwrapper a {
+    @apply underline text-yellow-300;
+}
+
+.blogwrapper a:hover {
+    @apply text-yellow-100;
+}
+
+.blogdmyouter {
+	@apply flex items-center my-8 text-slate-200 text-sm font-semibold uppercase tracking-wider;
+}
+
+.blogdmy {
+    @apply whitespace-nowrap pr-4;
+}
+
+.blogdmyborder {
+	@apply flex-grow border-t border-gray-700;
+}
+
+.blogpost {
+	@apply bg-dark-glass border border-glass-border rounded-lg p-6 m-4 text-white shadow-xl;
+}
+
+.blogposttitle {
+	@apply text-2xl font-bold mb-2;
+}
+
+.blogtagsouter {
+	@apply pt-4 border-t border-gray-700;
+}
+
+.blogtags {
+	@apply text-xs bg-slate-900/50 px-2 py-1 rounded text-slate-200;
+}
+
+.observerouter {
+	@apply h-32 flex items-center justify-center w-full;
+}
+
+.observerinner {
+	@apply flex space-x-2;
+}
+
+.bouncer {
+	@apply w-3 h-3 bg-blue-500 rounded-full animate-bounce;
+}
+
+.theend {
+	@apply text-gray-500 italic text-sm;
+}
+
+
+.blogwrapper blockquote {
+	@apply italic border-l-8 border-gray-400  my-2 mx-2 py-1 px-2;
+}
+
+.blogwrapper pre {
+	@apply bg-gray-800 p-4 rounded-lg text-white overflow-x-auto mb-2;
+}
+.blogwrapper code {
+	@apply font-mono text-sm;
+}
+
+.blogwrapper table {
+	@apply table-fixed;
+}
+
+.blogwrapper th,
+.blogwrapper td {
+	@apply text-left px-2 border;
+}
