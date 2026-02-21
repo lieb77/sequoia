@@ -14,6 +14,16 @@ const nextConfig = {
       },
     ],
   },
+  generateBuildId: async () => {
+    // This could be a git hash or a timestamp
+    return 'build-id-' + Date.now();
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['live.paulleiberman.org', 'localhost:3000'],
+    },
+  },
 }
+
 
 module.exports = nextConfig

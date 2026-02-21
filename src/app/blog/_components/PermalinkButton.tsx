@@ -25,7 +25,7 @@ export function PermalinkButton({ url }: { url: string }) {
     <div className="relative">
       <button 
         onClick={handleCopy}
-        className={styles.permalink}
+        className={`u-url ${styles.permalink}`}
       >
         {copied ? <AiOutlineCheck className={styles.permalinkText}/> : <AiOutlineLink />}
         <span>{copied ? 'Link Copied!' : 'Permalink'}</span>

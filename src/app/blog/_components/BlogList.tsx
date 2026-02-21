@@ -106,16 +106,16 @@ export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
                                 </div>
                             )}
 
-                        <div className={styles.blogpost}>
-                            <h3 className={styles.blogposttitle}>{post.title}</h3>
+                        <article className={`h-entry ${styles.blogpost}`}>
+                            <h3 className={`p-name ${styles.blogposttitle}`}>{post.title}</h3>
                             <p className={styles.blogposted}>Posted on: {post.date}</p>
-                            <div className={styles.blogwrapper}>
+                            <div className={`e-content ${styles.blogwrapper}`}>
                                 <div
                                     dangerouslySetInnerHTML={{ __html: sanitizeHTML(post.body) }}
                                 />                               
                             </div>
                          
-                         <div className={styles.postFooter}>
+                            <div className={styles.postFooter}>
 							  {/* Tags Section */}
 							  <div className={styles.tagGroup}>
 								<span className={styles.tagLabel}>
@@ -131,14 +131,11 @@ export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
 								  </Link>
 								))}
 							  </div>
-							
 							  {/* Permalink Section */}
 							<PermalinkButton url={`/blog/${post.path.replace('/blog/', '')}--${post.id}`} />
-							
 							</div>
-                         				
-                        </div>
-                    </div>
+                         </article>
+                      </div>
                 ))}
             </div>
 
