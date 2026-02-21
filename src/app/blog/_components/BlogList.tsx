@@ -1,9 +1,11 @@
 'use client'
-
+import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Jsona } from 'jsona'
+import { AiOutlineLink } from 'react-icons/ai'
+import { PermalinkButton } from '../_components/PermalinkButton'
 import { fixUrls, formatDate, sanitizeHTML, currentMonthYear } from '@/lib/utils'
-import styles from '../_styles/bloglist.module.css'
+import styles from '../_styles/blog.module.css'
 
 
 const dataFormatter = new Jsona()
@@ -38,8 +40,9 @@ export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
                 date: formatDate(node.created),
                 url: 'https://paulleiberman.org/blog',
                 body: fixUrls(node.body.processed),
-                tags: node.field_tags?.[0]?.name || 'Uncategorized',
-                dmy: node.field_ridedate ? node.field_ridedate : ''
+				tags: node.field_tags.map((tag: any) => ({ name: tag.name, id: tag.id })),
+                dmy: node.field_ridedate ? node.field_ridedate : '',
+                path: node.path.alias
             }))
 
             setNodes((prev) => [...prev, ...newNodes])
@@ -87,6 +90,7 @@ export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
         }
     }, [handleLoadMore, nextLink, isLoading])
 
+
     return (
         <section className={styles.blogcontainer}>
             <div className={styles.bloginner}>
@@ -108,13 +112,31 @@ export function BlogList({ initialNodes, nextUrl }: JSX.Element)  {
                             <div className={styles.blogwrapper}>
                                 <div
                                     dangerouslySetInnerHTML={{ __html: sanitizeHTML(post.body) }}
-                                />
+                                />                               
                             </div>
-                            <div className={styles.blogtagsouter}>
-                                <span className={styles.blogtags}>
-                                    Tag: {post.tags}
-                                </span>
-                            </div>
+                         
+                         <div className={styles.postFooter}>
+							  {/* Tags Section */}
+							  <div className={styles.tagGroup}>
+								<span className={styles.tagLabel}>
+								  Tags:
+								</span>
+								{post.tags.map((tag) => (
+								  <Link 
+									key={tag.name} 
+									href={`/blog/${tag.name.replace(/\s+/g, '-')}`}
+									className={styles.tagPill}
+								  >
+									{tag.name}
+								  </Link>
+								))}
+							  </div>
+							
+							  {/* Permalink Section */}
+							<PermalinkButton url={`/blog/${post.path.replace('/blog/', '')}--${post.id}`} />
+							
+							</div>
+                         				
                         </div>
                     </div>
                 ))}

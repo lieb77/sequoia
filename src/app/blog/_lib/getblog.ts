@@ -4,7 +4,7 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { fixUrls, formatDate, date2MonthYear } from "@/lib/utils"
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 
-export async function fetchBlog(tag: string) {
+export async function fetchBlogByTag(tag: string) {
 
     const params = new DrupalJsonApiParams()
         .addFields("node--blog", ['title', 'body', 'field_tags','created','path'])
@@ -23,24 +23,8 @@ export async function fetchBlog(tag: string) {
 	// Get the data
 	const links = response.links
  	const nodes = client.deserialize(response)
-
- 	// Extract and process the data
- 	const posts  = []
-    nodes.forEach((post) => 
-      	posts.push({
-			id: post.id,
-			title: post.title,
-			date: formatDate(post.created),
-			dmy: date2MonthYear(post.created),
-			url: "https://paulleiberman.org/blog",
-			body: fixUrls(post.body.processed),
-			tags: post.field_tags[0].name,
-			path: post.path.alias
-      })
-    )
-
- 	// return the data
- 	return({posts, links})
+ 	const posts = processNodes(nodes)
+ 	return ({posts, links})
 }
 
 export async function fetchBlogByYear(year: string) {
@@ -64,48 +48,37 @@ export async function fetchBlogByYear(year: string) {
   		deserialize: false,
 	})
 
-	// Get the data
+		// Get the data
 	const links = response.links
  	const nodes = client.deserialize(response)
-
- 	// Extract and process the data
- 	const posts  = []
-    nodes.forEach((post) =>
-      	posts.push({
-			id: post.id,
-			title: post.title,
-			date: formatDate(post.created),
-			dmy: date2MonthYear(post.created),
-			url: "https://paulleiberman.org/blog",
-			body: fixUrls(post.body.processed),
-			tags: post.field_tags[0].name,
-			path: post.path.alias
-      })
-    )
-
- 	// return the data
- 	return({posts, links})
+ 	const posts = processNodes(nodes)
+ 	return ({posts, links})
 }
 
-export async function fetchBlogByPath(path: string) {
+export async function fetchBlogById(id : string) {
 
-    const params = new DrupalJsonApiParams()
-        .addFields("node--blog", ['title', 'body', 'field_tags','created', 'path'])
+	 const params = new DrupalJsonApiParams()
+        .addFields("node--blog", ['title', 'body', 'field_tags','created','path'])
         .addSort("created", "DESC")
         .addInclude('field_tags')
-        .addPageLimit('5')
-//		.addFilter("path.alias", '/blog/' +  path )
+    	.addFilter('id', id)
 		.getQueryObject()
-
-     const response = await client.getResourceCollection<DrupalNode>("node--blog", {
+		
+	const response = await client.getResourceCollection<DrupalNode>("node--blog", {
      	params: params,
   		deserialize: false,
 	})
 
-	// Get the data
+		// Get the data
 	const links = response.links
  	const nodes = client.deserialize(response)
-
+ 	const posts = processNodes(nodes)
+ 	return ({posts, links})
+}
+		
+		
+		
+function processNodes(nodes){
  	// Extract and process the data
  	const posts  = []
     nodes.forEach((post) =>
@@ -116,14 +89,15 @@ export async function fetchBlogByPath(path: string) {
 			dmy: date2MonthYear(post.created),
 			url: "https://paulleiberman.org/blog",
 			body: fixUrls(post.body.processed),
-			tags: post.field_tags[0].name,
+			tags: post.field_tags.map((tag: any) => ({ name: tag.name, id: tag.id })),
 			path: post.path.alias
       })
     )
 
  	// return the data
- 	return({posts, links})
+ 	return(posts)
 }
+
 
 
 export async function fetchTags() {

@@ -69,7 +69,7 @@
 }
 
 .theend {
-	@apply text-gray-500 italic text-sm;
+	@apply text-white italic text-sm bg-dark-glass p-2 rounded-xl border border-glass-border;
 }
 
 
@@ -91,4 +91,49 @@
 .blogwrapper th,
 .blogwrapper td {
 	@apply text-left px-2 border;
+}
+
+
+.postFooter {
+  @apply mt-6 flex flex-wrap items-center gap-y-3 gap-x-6 border-t border-slate-100 pt-4 text-sm;
+}
+
+.tagGroup {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.tagLabel {
+  @apply font-semibold text-slate-200  tracking-wider text-xs mr-1;
+}
+
+.tagPill {
+  @apply bg-slate-100 text-slate-700 px-2 rounded-full border border-slate-200 transition-colors;
+}
+
+.tagPill:hover {
+  @apply bg-blue-100 text-blue-700 border-blue-200;
+}
+
+.permalink {
+  @apply flex items-center gap-1.5 font-medium transition-all ml-auto;
+  /* Use a high-contrast color for the icon/text */
+  color: var(--color-yellow-300); 
+}
+
+.permalinkText {
+  @apply underline underline-offset-4 decoration-2;
+  /* The underline can be slightly dimmer than the text for a pro look */
+  decoration-color: rgba(34, 211, 238, 0.4); 
+}
+
+.permalink:hover {
+  color: var(--color-yellow-100);
+}
+
+.permalink:hover .permalinkText {
+  @apply decoration-yellow-100;
+}
+
+.toast {
+	@apply fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-xl text-sm animate-bounce;
 }
