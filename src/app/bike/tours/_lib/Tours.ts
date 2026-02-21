@@ -48,7 +48,7 @@ export class Tours {
 		 
 		// Get the photos
 		const photoData = await fetchPhotosForTour(this.tourId)
-    	const photos    = new Photos(photoData).getPhotos()
+    	const photos    = new Photos(photoData).getPhotosForTour()
 
 		const Tour = {
 			id: tour.id,

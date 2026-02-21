@@ -50,6 +50,21 @@ export class Photos {
 		return Photos
 	}
 
+	public getPhotosForTour() : PhotoData[] {
+		const Photos: PhotoData[] = []
+		this.rawdata.forEach((media: JsonPhoto) => {
+			Photos.push({
+				id: media.id,
+				name: media.name,
+				url: media.field_media_image.image_style_uri ? media.field_media_image.image_style_uri['1024x768'] : "/Touring.jpg"
+			})
+		})
+		return Photos
+	}
+
+
+
+
   	public getPhotosForGallery() : PhotoData[] {
 		const Photos: PhotoData[] = []
 		this.rawdata.forEach((photo: JsonPhoto) => {
