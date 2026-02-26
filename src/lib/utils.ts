@@ -36,8 +36,8 @@ export function sanitizeHTML(html: string): string {
 
 // Add bas URL to image paths
 export function fixUrls(body: string) : string {
-		const regex = /\/sites/g
-		return body.replaceAll(regex, base + "/sites");
+		const regex = /\"\/sites/g
+		return body.replaceAll(regex, '\"' + base + "/sites");
 }
 
 // Format date string
@@ -64,6 +64,7 @@ export function parseHtml(html: string) {
 
   // 3. Extract Image URLs from <img> tags
   const images = root.querySelectorAll('img').map(img => img.getAttribute('src'));
+
 
   // 4. Extract "Clean" text (no tags at all)
   const rawText = root.structuredText;
